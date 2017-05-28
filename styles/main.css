@@ -1,0 +1,106 @@
+.label {
+  padding: 5px;
+
+}
+
+.textBox {
+  padding: 5px;
+  margin-left: 5px;
+}
+
+input[type="button"] {
+  display: block;
+}
+
+#infoBox, #errorBox, #loadingBox {
+    width: 80%;
+    margin: 10px auto;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    border-radius: 3px;
+    display: none;
+    cursor: pointer;
+}
+
+#loadingBox {
+    background: #7CB3E9;
+}
+#infoBox {
+    background: #393;
+}
+#errorBox {
+    background: #F50;
+}
+
+table {
+  border: 3px solid black;
+  border-collapse: collapse;
+  margin: auto;
+}
+
+td {
+  width: 65px;
+  height: 58px;
+  border: 3px solid black;
+}
+
+.black-rock {
+  background: url(../pics/Chess_Pieces_Sprite.svg) no-repeat -243px -60px;
+  background-size: 550% 200%;
+}
+
+.black-knight {
+  background: url(../pics/Chess_Pieces_Sprite.svg) no-repeat -180px -60px;
+  background-size: 550% 200%;
+}
+
+.black-bishop {
+  background: url(../pics/Chess_Pieces_Sprite.svg) no-repeat -120px -60px;
+  background-size: 550% 200%;
+}
+
+.black-king {
+  background: url(../pics/Chess_Pieces_Sprite.svg) no-repeat 3px -60px;
+  background-size: 550% 200%;
+}
+
+.black-queen {
+  background: url(../pics/Chess_Pieces_Sprite.svg) no-repeat -58px -60px;
+  background-size: 550% 200%;
+}
+
+.black-pawn {
+  background: url(../pics/Chess_Pieces_Sprite.svg) no-repeat -302px -60px;
+  background-size: 550% 200%;
+}
+
+.white-rock {
+  background: url(../pics/Chess_Pieces_Sprite.svg) no-repeat -243px 0px;
+  background-size: 550% 200%;
+}
+
+.white-knight {
+  background: url(../pics/Chess_Pieces_Sprite.svg) no-repeat -180px 0px;
+  background-size: 550% 200%;
+}
+
+.white-bishop {
+  background: url(../pics/Chess_Pieces_Sprite.svg) no-repeat -120px 0px;
+  background-size: 550% 200%;
+}
+
+.white-queen {
+  background: url(../pics/Chess_Pieces_Sprite.svg) no-repeat -58px 0px;
+  background-size: 550% 200%;
+}
+
+.white-king {
+  background: url(../pics/Chess_Pieces_Sprite.svg) no-repeat 3px 0px;
+  background-size: 550% 200%;
+}
+
+.white-pawn {
+  background: url(../pics/Chess_Pieces_Sprite.svg) no-repeat -302px 0px;
+  background-size: 550% 200%;
+}

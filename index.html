@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" href="./styles/main.css">
+</head>
+
+<body>
+  <div id="nav">
+    <a href="#/">Home</a>
+    <a href="#/play">Play</a>
+    <a href="#/details">Details</a>
+    <a href="#/register">Register</a>
+    <a href="#/login">Login</a>
+    <a href="#/logout">Logout</a>
+    <div id="loadingBox">Loading ...</div>
+    <div id="infoBox"></div>
+    <div id="errorBox"></div>
+  </div>
+
+  <div id="content">
+
+  </div>
+  <script src="./node_modules/systemjs/dist/system.js"></script>
+  <script src="./system-config.js"></script>
+  <script src="./bower_components/jquery/dist/jquery.js"></script>
+  <script src="./bower_components/sammy/lib/sammy.js"></script>
+  <script>
+    System.import('main');
+  </script>
+  <script src="./sammy-config.js"></script>
+</body>
+
+</html>
