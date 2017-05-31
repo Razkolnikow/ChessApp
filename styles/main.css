@@ -45,6 +45,10 @@ td {
   border: 3px solid black;
 }
 
+.clickable:hover {
+  border: 3px solid red;
+}
+
 .black-rock {
   background: url(../pics/Chess_Pieces_Sprite.svg) no-repeat -243px -60px;
   background-size: 550% 200%;

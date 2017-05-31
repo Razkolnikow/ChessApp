@@ -1,5 +1,4 @@
 import 'jquery';
-import { func } from 'test.js';
 import { register } from './Views/RegisterView.js';
 import { login } from './Views/LoginView.js';
 import { App } from './scripts/App.js';
