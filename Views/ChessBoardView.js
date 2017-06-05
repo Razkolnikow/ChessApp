@@ -1,5 +1,21 @@
 import jquery from 'jquery';
 
+class Cache {
+  constructor() {
+    this._lastId = '';
+  }
+
+  get lastId() {
+    return this._lastId;
+  }
+
+  set lastId(val) {
+    this._lastId = val;
+  }
+}
+
+let cache = new Cache();
+
 let chessBoard = function createChessBoard() {
   let brown = '#DE923C';
   let table = $('<table>');
@@ -51,9 +67,11 @@ let chessBoard = function createChessBoard() {
       } else if (i > 5) {
         if (i === 6) {
           td.addClass('white-pawn clickable');
+
         } else if (i === 7) {
           if (j === 7) {
             td.addClass('white-rock clickable');
+
           } else if (j === 5) {
             td.addClass('white-bishop clickable');
           } else if (j === 3) {
@@ -64,6 +82,16 @@ let chessBoard = function createChessBoard() {
         }
       }
 
+      td.click(function(event) {
+        if(event.target.className.length > 0) {
+          cache.lastId = event.target.id;
+        } else {
+          let lastClickedElement = document.getElementById(cache.lastId);
+          event.target.className = lastClickedElement.className;
+          lastClickedElement.className = '';
+        }
+      });
+      
       row.append(td);
       counter += 1;
     }
