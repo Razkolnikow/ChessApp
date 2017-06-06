@@ -3,6 +3,7 @@ import jquery from 'jquery';
 class Cache {
   constructor() {
     this._lastId = '';
+    this._lastColor = -1;
   }
 
   get lastId() {
@@ -12,6 +13,30 @@ class Cache {
   set lastId(val) {
     this._lastId = val;
   }
+
+  get lastColor() {
+    return this._lastColor;
+  }
+
+  set lastColor(val) {
+    this._lastColor = val;
+  }
+}
+
+function pawnMoveValidator(field, piece) {
+  let diff = Number(field.id[1]) - Number(piece.id[1]);
+  if (piece.className.indexOf('white') >= 0) {
+
+    if (field.id[0] === piece.id[0] && (diff === 1 || (diff === 2 && piece.id[1] === '2'))) {
+      return true;
+    }
+  } else {
+    if (field.id[0] === piece.id[0] && (diff === -1 || (diff === -2 && piece.id[1] === '7'))) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 let cache = new Cache();
@@ -83,15 +108,40 @@ let chessBoard = function createChessBoard() {
       }
 
       td.click(function(event) {
+        if (event.target.id === cache.lastId) {
+          cache.lastId = '';
+          event.target.style.backgroundColor = cache.lastColor;
+          cache.lastColor = -1;
+          return;
+        }
+
         if(event.target.className.length > 0) {
+          if (cache.lastColor !== -1) {
+            let lastPiece = document.getElementById(cache.lastId);
+            lastPiece.style.backgroundColor = cache.lastColor;
+            cache.lastColor = -1;
+            cache.lastId = '';
+            return;
+          }
+
           cache.lastId = event.target.id;
+          cache.lastColor = event.target.style.backgroundColor;
+          event.target.style.backgroundColor = 'red';
+
         } else {
           let lastClickedElement = document.getElementById(cache.lastId);
-          event.target.className = lastClickedElement.className;
-          lastClickedElement.className = '';
+          if (lastClickedElement.className.indexOf('pawn') >= 0) {
+              if (pawnMoveValidator(event.target, lastClickedElement)) {
+              event.target.className = lastClickedElement.className;
+              lastClickedElement.className = '';
+              lastClickedElement.style.backgroundColor = cache.lastColor;
+              cache.lastColor = -1;
+              cache.lastId = '';
+            }
+          }
         }
       });
-      
+
       row.append(td);
       counter += 1;
     }
