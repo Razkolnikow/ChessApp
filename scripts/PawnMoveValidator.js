@@ -10,7 +10,8 @@ function validatePawnMove(field, piece) {
     }
   } else {
     if (field.id[0] === piece.id[0] && (diff === -1 ||
-      (diff === -2 && piece.id[1] === '7'))) {
+      (diff === -2 && piece.id[1] === '7'
+      && document.getElementById(piece.id[0] + '6').className.length === 0))) {
       return true;
     }
   }
