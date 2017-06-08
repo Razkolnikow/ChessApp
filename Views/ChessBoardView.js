@@ -1,4 +1,6 @@
 import jquery from 'jquery';
+import { validatePawnMove } from '../scripts/PawnMoveValidator.js';
+import { validatePawnTake } from '../scripts/PawnMoveValidator.js';
 
 class Cache {
   constructor() {
@@ -21,22 +23,6 @@ class Cache {
   set lastColor(val) {
     this._lastColor = val;
   }
-}
-
-function pawnMoveValidator(field, piece) {
-  let diff = Number(field.id[1]) - Number(piece.id[1]);
-  if (piece.className.indexOf('white') >= 0) {
-
-    if (field.id[0] === piece.id[0] && (diff === 1 || (diff === 2 && piece.id[1] === '2'))) {
-      return true;
-    }
-  } else {
-    if (field.id[0] === piece.id[0] && (diff === -1 || (diff === -2 && piece.id[1] === '7'))) {
-      return true;
-    }
-  }
-
-  return false;
 }
 
 let cache = new Cache();
@@ -114,8 +100,19 @@ let chessBoard = function createChessBoard() {
           cache.lastColor = -1;
           return;
         }
+        let lastClickedElement = document.getElementById(cache.lastId);
 
         if(event.target.className.length > 0) {
+          // Pawn take piece
+          if (cache.lastId.length > 0 && validatePawnTake(event.target, lastClickedElement)) {
+            event.target.className = lastClickedElement.className;
+            lastClickedElement.className = '';
+            lastClickedElement.style.backgroundColor = cache.lastColor;
+            cache.lastColor = -1;
+            cache.lastId = '';
+            return;
+          }
+
           if (cache.lastColor !== -1) {
             let lastPiece = document.getElementById(cache.lastId);
             lastPiece.style.backgroundColor = cache.lastColor;
@@ -129,9 +126,9 @@ let chessBoard = function createChessBoard() {
           event.target.style.backgroundColor = 'red';
 
         } else {
-          let lastClickedElement = document.getElementById(cache.lastId);
+          // Move pawn
           if (lastClickedElement.className.indexOf('pawn') >= 0) {
-              if (pawnMoveValidator(event.target, lastClickedElement)) {
+              if (validatePawnMove(event.target, lastClickedElement)) {
               event.target.className = lastClickedElement.className;
               lastClickedElement.className = '';
               lastClickedElement.style.backgroundColor = cache.lastColor;
