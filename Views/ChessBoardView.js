@@ -1,6 +1,7 @@
 import jquery from 'jquery';
 import { validatePawnMove } from '../scripts/PawnMoveValidator.js';
 import { validatePawnTake } from '../scripts/PawnMoveValidator.js';
+import { validateBishopMove } from '../scripts/BishopMoveValidator.js';
 
 class Cache {
   constructor() {
@@ -105,11 +106,15 @@ let chessBoard = function createChessBoard() {
         if(event.target.className.length > 0) {
           // Pawn take piece
           if (cache.lastId.length > 0 && validatePawnTake(event.target, lastClickedElement)) {
-            event.target.className = lastClickedElement.className;
-            lastClickedElement.className = '';
-            lastClickedElement.style.backgroundColor = cache.lastColor;
-            cache.lastColor = -1;
-            cache.lastId = '';
+            //event.target.className = lastClickedElement.className;
+            //lastClickedElement.className = '';
+            //lastClickedElement.style.backgroundColor = cache.lastColor;
+            //cache.lastColor = -1;
+            //cache.lastId = '';
+            takePiece();
+            return;
+          } else if (cache.lastId.length > 0 && validateBishopMove(event.target, lastClickedElement)) {
+            takePiece();
             return;
           }
 
@@ -129,13 +134,34 @@ let chessBoard = function createChessBoard() {
           // Move pawn
           if (lastClickedElement.className.indexOf('pawn') >= 0) {
               if (validatePawnMove(event.target, lastClickedElement)) {
-              event.target.className = lastClickedElement.className;
-              lastClickedElement.className = '';
-              lastClickedElement.style.backgroundColor = cache.lastColor;
-              cache.lastColor = -1;
-              cache.lastId = '';
+              //event.target.className = lastClickedElement.className;
+              //lastClickedElement.className = '';
+              //lastClickedElement.style.backgroundColor = cache.lastColor;
+              //cache.lastColor = -1;
+              //cache.lastId = '';
+              movePiece();
+            }
+          } else if (lastClickedElement.className.indexOf('bishop') >= 0) {
+            if (validateBishopMove(event.target, lastClickedElement)) {
+              movePiece();
             }
           }
+        }
+
+        function takePiece() {
+          event.target.className = lastClickedElement.className;
+          lastClickedElement.className = '';
+          lastClickedElement.style.backgroundColor = cache.lastColor;
+          cache.lastColor = -1;
+          cache.lastId = '';
+        }
+
+        function movePiece() {
+          event.target.className = lastClickedElement.className;
+          lastClickedElement.className = '';
+          lastClickedElement.style.backgroundColor = cache.lastColor;
+          cache.lastColor = -1;
+          cache.lastId = '';
         }
       });
 

@@ -1,0 +1,3 @@
+function validateRockMove(field, piece) {
+
+}
