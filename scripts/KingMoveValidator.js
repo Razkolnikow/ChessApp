@@ -1,3 +1,3 @@
 function validateKingMove(field, piece) {
-
+  
 }
