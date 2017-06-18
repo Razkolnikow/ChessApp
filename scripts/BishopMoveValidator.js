@@ -8,13 +8,12 @@ function validateBishopMove(field, piece) {
   let fieldIndex = letters.indexOf(fieldLetter);
   if ((fieldIndex - pieceIndex) === (fieldNumber - pieceNumber)
       || (pieceIndex - fieldIndex) === (fieldNumber - pieceNumber)) {
-        // TODO Bishop is not allowed to move through other pieces !!!
         if (fieldIndex > pieceIndex && fieldNumber > pieceNumber) {
           let targetNum1 = fieldNumber - 1;
           for (let i1 = fieldIndex - 1; i1 > pieceIndex; i1--) {
             if (document.getElementById(letters[i1] + targetNum1).className.length > 0) {
               return false;
-            } 
+            }
 
             targetNum1--;
           }

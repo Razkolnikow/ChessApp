@@ -12,6 +12,10 @@ import {
   validateKnightMove
 } from '../scripts/KnightMoveValidator.js';
 
+import {
+  validateKingMove
+} from '../scripts/KingMoveValidator.js';
+
 class Cache {
   constructor() {
     this._lastId = '';
@@ -126,7 +130,11 @@ let chessBoard = function createChessBoard() {
             lastClickedElement.className.indexOf('knight') >= 0 && isValidTake(event.target, lastClickedElement)) {
             takePiece();
             return;
-          }
+          } else if (cache.lastId.length > 0 && validateKingMove(event.target, lastClickedElement) &&
+            lastClickedElement.className.indexOf('king') >= 0 && isValidTake(event.target, lastClickedElement)) {
+              takePiece();
+              return;
+            }
 
           if (cache.lastColor !== -1) {
             let lastPiece = document.getElementById(cache.lastId);
@@ -152,6 +160,10 @@ let chessBoard = function createChessBoard() {
             }
           } else if (lastClickedElement.className.indexOf('knight') >= 0) {
             if (validateKnightMove(event.target, lastClickedElement)) {
+              movePiece();
+            }
+          } else if (lastClickedElement.className.indexOf('king') >= 0) {
+            if (validateKingMove(event.target, lastClickedElement)) {
               movePiece();
             }
           }
