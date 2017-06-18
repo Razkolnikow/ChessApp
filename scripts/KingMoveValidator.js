@@ -22,8 +22,8 @@ function validateKingMove(field, piece) {
   return false;
 }
 
-function validateIfTargetedMoveIsAttacked(fieldIndice, fieldNum) {
-  
+function validateIfTargetedFieldIsAttacked(fieldIndice, fieldNum) {
+
 }
 
 export { validateKingMove };
