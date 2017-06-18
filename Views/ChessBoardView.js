@@ -16,6 +16,14 @@ import {
   validateKingMove
 } from '../scripts/KingMoveValidator.js';
 
+import {
+  validateRockMove
+} from '../scripts/RockMoveValidator.js';
+
+import {
+  validateQueenMove
+} from '../scripts/QueenMoveValidator.js';
+
 class Cache {
   constructor() {
     this._lastId = '';
@@ -134,6 +142,14 @@ let chessBoard = function createChessBoard() {
             lastClickedElement.className.indexOf('king') >= 0 && isValidTake(event.target, lastClickedElement)) {
               takePiece();
               return;
+            } else if (cache.lastId.length > 0 && validateRockMove(event.target, lastClickedElement) &&
+              lastClickedElement.className.indexOf('rock') >= 0 && isValidTake(event.target, lastClickedElement)) {
+                takePiece();
+                return;
+            } else if (cache.lastId.length > 0 && validateQueenMove(event.target, lastClickedElement) &&
+              lastClickedElement.className.indexOf('queen') >= 0 && isValidTake(event.target, lastClickedElement)) {
+                takePiece();
+                return;
             }
 
           if (cache.lastColor !== -1) {
@@ -164,6 +180,14 @@ let chessBoard = function createChessBoard() {
             }
           } else if (lastClickedElement.className.indexOf('king') >= 0) {
             if (validateKingMove(event.target, lastClickedElement)) {
+              movePiece();
+            }
+          } else if (lastClickedElement.className.indexOf('rock') >= 0) {
+            if (validateRockMove(event.target, lastClickedElement)) {
+              movePiece();
+            }
+          } else if (lastClickedElement.className.indexOf('queen') >= 0) {
+            if (validateQueenMove(event.target, lastClickedElement)) {
               movePiece();
             }
           }
