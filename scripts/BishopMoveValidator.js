@@ -14,7 +14,7 @@ function validateBishopMove(field, piece) {
           for (let i1 = fieldIndex - 1; i1 > pieceIndex; i1--) {
             if (document.getElementById(letters[i1] + targetNum1).className.length > 0) {
               return false;
-            }
+            } 
 
             targetNum1--;
           }
