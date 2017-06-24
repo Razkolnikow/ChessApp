@@ -24,6 +24,10 @@ import {
   validateQueenMove
 } from '../scripts/QueenMoveValidator.js';
 
+import {
+  BlackOrWhiteMoveValidator
+} from '../scripts/MoveCache.js';
+
 class Cache {
   constructor() {
     this._lastId = '';
@@ -48,6 +52,7 @@ class Cache {
 }
 
 let cache = new Cache();
+let moveTurnValidator = new BlackOrWhiteMoveValidator();
 
 let chessBoard = function createChessBoard() {
   let brown = '#DE923C';
@@ -123,6 +128,21 @@ let chessBoard = function createChessBoard() {
           return;
         }
         let lastClickedElement = document.getElementById(cache.lastId);
+        if (lastClickedElement) {
+          let isValid = moveTurnValidator
+            .validateMove(
+            lastClickedElement
+            .className
+            .substring(0, lastClickedElement.className.indexOf('-')));
+
+          if (!isValid) {
+            let lastPiece = document.getElementById(cache.lastId);
+            lastPiece.style.backgroundColor = cache.lastColor;
+            cache.lastColor = -1;
+            cache.lastId = '';
+            return;
+          }
+        }
 
         if (event.target.className.length > 0) {
           // Pawn take piece
@@ -166,27 +186,27 @@ let chessBoard = function createChessBoard() {
 
         } else {
           // Move pawn
-          if (lastClickedElement.className.indexOf('pawn') >= 0) {
+          if (lastClickedElement && lastClickedElement.className.indexOf('pawn') >= 0) {
             if (validatePawnMove(event.target, lastClickedElement)) {
               movePiece();
             }
-          } else if (lastClickedElement.className.indexOf('bishop') >= 0) {
+          } else if (lastClickedElement && lastClickedElement.className.indexOf('bishop') >= 0) {
             if (validateBishopMove(event.target, lastClickedElement)) {
               movePiece();
             }
-          } else if (lastClickedElement.className.indexOf('knight') >= 0) {
+          } else if (lastClickedElement && lastClickedElement.className.indexOf('knight') >= 0) {
             if (validateKnightMove(event.target, lastClickedElement)) {
               movePiece();
             }
-          } else if (lastClickedElement.className.indexOf('king') >= 0) {
+          } else if (lastClickedElement && lastClickedElement.className.indexOf('king') >= 0) {
             if (validateKingMove(event.target, lastClickedElement)) {
               movePiece();
             }
-          } else if (lastClickedElement.className.indexOf('rock') >= 0) {
+          } else if (lastClickedElement && lastClickedElement.className.indexOf('rock') >= 0) {
             if (validateRockMove(event.target, lastClickedElement)) {
               movePiece();
             }
-          } else if (lastClickedElement.className.indexOf('queen') >= 0) {
+          } else if (lastClickedElement && lastClickedElement.className.indexOf('queen') >= 0) {
             if (validateQueenMove(event.target, lastClickedElement)) {
               movePiece();
             }
