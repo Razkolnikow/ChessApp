@@ -28,7 +28,6 @@ export class BlackOrWhiteMoveValidator {
 
       return false;
     } else {
-      this.lastMove = blackOrWhite;
       return true;
     }
   }

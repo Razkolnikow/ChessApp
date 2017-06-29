@@ -214,6 +214,9 @@ let chessBoard = function createChessBoard() {
         }
 
         function takePiece() {
+          moveTurnValidator.lastMove = lastClickedElement
+          .className
+          .substring(0, lastClickedElement.className.indexOf('-'));
           event.target.className = lastClickedElement.className;
           lastClickedElement.className = '';
           lastClickedElement.style.backgroundColor = cache.lastColor;
@@ -222,6 +225,9 @@ let chessBoard = function createChessBoard() {
         }
 
         function movePiece() {
+          moveTurnValidator.lastMove = lastClickedElement
+          .className
+          .substring(0, lastClickedElement.className.indexOf('-'));
           event.target.className = lastClickedElement.className;
           lastClickedElement.className = '';
           lastClickedElement.style.backgroundColor = cache.lastColor;
