@@ -28,28 +28,9 @@ import {
   BlackOrWhiteMoveValidator
 } from '../scripts/MoveCache.js';
 
-class Cache {
-  constructor() {
-    this._lastId = '';
-    this._lastColor = -1;
-  }
-
-  get lastId() {
-    return this._lastId;
-  }
-
-  set lastId(val) {
-    this._lastId = val;
-  }
-
-  get lastColor() {
-    return this._lastColor;
-  }
-
-  set lastColor(val) {
-    this._lastColor = val;
-  }
-}
+import {
+  Cache
+} from '../scripts/GlobalBoardCache.js';
 
 let cache = new Cache();
 let moveTurnValidator = new BlackOrWhiteMoveValidator();
@@ -158,12 +139,14 @@ let chessBoard = function createChessBoard() {
             lastClickedElement.className.indexOf('knight') >= 0 && isValidTake(event.target, lastClickedElement)) {
             takePiece();
             return;
-          } else if (cache.lastId.length > 0 && validateKingMove(event.target, lastClickedElement) &&
+          } else if (cache.lastId.length > 0 && validateKingMove(event.target, lastClickedElement, cache) &&
             lastClickedElement.className.indexOf('king') >= 0 && isValidTake(event.target, lastClickedElement)) {
+              moveKingSaveToGlobalCache(lastClickedElement);
               takePiece();
               return;
             } else if (cache.lastId.length > 0 && validateRockMove(event.target, lastClickedElement) &&
               lastClickedElement.className.indexOf('rock') >= 0 && isValidTake(event.target, lastClickedElement)) {
+                moveRockSaveToGLobalCache(lastClickedElement);
                 takePiece();
                 return;
             } else if (cache.lastId.length > 0 && validateQueenMove(event.target, lastClickedElement) &&
@@ -199,11 +182,13 @@ let chessBoard = function createChessBoard() {
               movePiece();
             }
           } else if (lastClickedElement && lastClickedElement.className.indexOf('king') >= 0) {
-            if (validateKingMove(event.target, lastClickedElement)) {
+            if (validateKingMove(event.target, lastClickedElement, cache)) {
+              moveKingSaveToGlobalCache(lastClickedElement);
               movePiece();
             }
           } else if (lastClickedElement && lastClickedElement.className.indexOf('rock') >= 0) {
             if (validateRockMove(event.target, lastClickedElement)) {
+              moveRockSaveToGLobalCache(lastClickedElement);
               movePiece();
             }
           } else if (lastClickedElement && lastClickedElement.className.indexOf('queen') >= 0) {
@@ -233,6 +218,28 @@ let chessBoard = function createChessBoard() {
           lastClickedElement.style.backgroundColor = cache.lastColor;
           cache.lastColor = -1;
           cache.lastId = '';
+        }
+
+        // TODO fix method
+        function moveKingSaveToGlobalCache(el) {
+          if (el.className === 'white-king') {
+            cache.moveWhiteKing();
+          } else if (el.className === 'black-king') {
+            cache.moveBlackKing();
+          }
+        }
+
+        // TODO fix method
+        function moveRockSaveToGLobalCache(el) {
+          if (el.className === 'white-rock' && el.id[0] == 'H') {
+            cache.moveHWhiteRock();
+          } else if (el.className === 'white-rock' && el.id[0] == 'A') {
+            cache.moveAWhiteRock();
+          } else if (el.className === 'black-rock' && el.id[0] == 'H') {
+            cache.moveHBlackRock();
+          } else if (el.className === 'black-rock' && el.id[0] == 'A') {
+            cache.moveABlackRock();
+          }
         }
 
         function isValidTake(field, piece) {
