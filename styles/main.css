@@ -130,3 +130,9 @@ td {
 .main {
   display: flex;
 }
+
+#moves {
+  margin-left: 30px;
+  font-size: 1.3em;
+  font-family: Arial;
+}

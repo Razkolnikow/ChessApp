@@ -32,8 +32,13 @@ import {
   Cache
 } from '../scripts/GlobalBoardCache.js';
 
+import {
+  Printer
+} from '../scripts/MovePrinter.js';
+
 let cache = new Cache();
 let moveTurnValidator = new BlackOrWhiteMoveValidator();
+let printer = new Printer();
 
 let chessBoard = function createChessBoard() {
   let brown = '#DE923C';
@@ -130,28 +135,34 @@ let chessBoard = function createChessBoard() {
           if (cache.lastId.length > 0 && validatePawnTake(event.target, lastClickedElement) &&
             lastClickedElement.className.indexOf('pawn') >= 0) {
             takePiece();
+            printer.printMove(lastClickedElement.id, event.target.id);
             return;
           } else if (cache.lastId.length > 0 && validateBishopMove(event.target, lastClickedElement) &&
             lastClickedElement.className.indexOf('bishop') >= 0 && isValidTake(event.target, lastClickedElement)) {
             takePiece();
+            printer.printMove(lastClickedElement.id, event.target.id);
             return;
           } else if (cache.lastId.length > 0 && validateKnightMove(event.target, lastClickedElement) &&
             lastClickedElement.className.indexOf('knight') >= 0 && isValidTake(event.target, lastClickedElement)) {
             takePiece();
+            printer.printMove(lastClickedElement.id, event.target.id);
             return;
           } else if (cache.lastId.length > 0 && validateKingMove(event.target, lastClickedElement, cache) &&
             lastClickedElement.className.indexOf('king') >= 0 && isValidTake(event.target, lastClickedElement)) {
               moveKingSaveToGlobalCache(lastClickedElement);
               takePiece();
+              printer.printMove(lastClickedElement.id, event.target.id);
               return;
             } else if (cache.lastId.length > 0 && validateRockMove(event.target, lastClickedElement) &&
               lastClickedElement.className.indexOf('rock') >= 0 && isValidTake(event.target, lastClickedElement)) {
                 moveRockSaveToGLobalCache(lastClickedElement);
                 takePiece();
+                printer.printMove(lastClickedElement.id, event.target.id);
                 return;
             } else if (cache.lastId.length > 0 && validateQueenMove(event.target, lastClickedElement) &&
               lastClickedElement.className.indexOf('queen') >= 0 && isValidTake(event.target, lastClickedElement)) {
                 takePiece();
+                printer.printMove(lastClickedElement.id, event.target.id);
                 return;
             }
 
@@ -172,28 +183,34 @@ let chessBoard = function createChessBoard() {
           if (lastClickedElement && lastClickedElement.className.indexOf('pawn') >= 0) {
             if (validatePawnMove(event.target, lastClickedElement)) {
               movePiece();
+              printer.printMove(lastClickedElement.id, event.target.id);
             }
           } else if (lastClickedElement && lastClickedElement.className.indexOf('bishop') >= 0) {
             if (validateBishopMove(event.target, lastClickedElement)) {
               movePiece();
+              printer.printMove(lastClickedElement.id, event.target.id);
             }
           } else if (lastClickedElement && lastClickedElement.className.indexOf('knight') >= 0) {
             if (validateKnightMove(event.target, lastClickedElement)) {
               movePiece();
+              printer.printMove(lastClickedElement.id, event.target.id);
             }
           } else if (lastClickedElement && lastClickedElement.className.indexOf('king') >= 0) {
             if (validateKingMove(event.target, lastClickedElement, cache)) {
               moveKingSaveToGlobalCache(lastClickedElement);
               movePiece();
+              printer.printMove(lastClickedElement.id, event.target.id);
             }
           } else if (lastClickedElement && lastClickedElement.className.indexOf('rock') >= 0) {
             if (validateRockMove(event.target, lastClickedElement)) {
               moveRockSaveToGLobalCache(lastClickedElement);
               movePiece();
+              printer.printMove(lastClickedElement.id, event.target.id);
             }
           } else if (lastClickedElement && lastClickedElement.className.indexOf('queen') >= 0) {
             if (validateQueenMove(event.target, lastClickedElement)) {
               movePiece();
+              printer.printMove(lastClickedElement.id, event.target.id);
             }
           }
         }
