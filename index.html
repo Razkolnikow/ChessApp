@@ -8,20 +8,21 @@
 </head>
 
 <body>
-  <div id="nav">
-    <a href="#/">Home</a>
-    <a href="#/play">Play</a>
-    <a href="#/details">Details</a>
-    <a href="#/register">Register</a>
-    <a href="#/login">Login</a>
-    <a href="#/logout">Logout</a>
-    <div id="loadingBox">Loading ...</div>
-    <div id="infoBox"></div>
-    <div id="errorBox"></div>
-  </div>
+  <div class="info" id="loadingBox">Loading ...</div>
+  <div class="info" id="infoBox"></div>
+  <div class="info" id="errorBox"></div>
+  <div class="main">
+    <div id="nav">
+      <a class="nav-element" href="#/">Home</a>
+      <a class="nav-element" href="#/play">Play</a>
+      <a class="nav-element" href="#/details">Details</a>
+      <a class="nav-element" href="#/register">Register</a>
+      <a class="nav-element" href="#/login">Login</a>
+      <a class="nav-element" href="#/logout">Logout</a>
+    </div>
+    <div id="content">
 
-  <div id="content">
-
+    </div>
   </div>
   <script src="./node_modules/systemjs/dist/system.js"></script>
   <script src="./system-config.js"></script>

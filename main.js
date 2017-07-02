@@ -29,6 +29,7 @@ function executeLogin(sammy) {
 
 var sammyApp = Sammy('#content', function () {
   this.get('#/', function () {
+    $('#content').empty();
     $('#content').text('Home')
 
     // Getting query params
@@ -36,25 +37,30 @@ var sammyApp = Sammy('#content', function () {
   });
 
   this.get('#/details', function () {
+    $('#content').empty();
     $('#content').text('Details')
   });
 
   this.get('#/register', function () {
+    $('#content').empty();
     register();
     executeRegister(this);
   });
 
   this.get('#/login', function () {
+    $('#content').empty();
     login();
     executeLogin(this);
   });
 
   this.get('#/login', function () {
+    $('#content').empty();
     App.logout();
     this.redirect('#/');
   });
 
   this.get('#/play', function () {
+    $('#content').empty();
     chessBoard();
   })
 });
