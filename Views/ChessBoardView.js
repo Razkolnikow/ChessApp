@@ -220,26 +220,14 @@ let chessBoard = function createChessBoard() {
           cache.lastId = '';
         }
 
-        // TODO fix method
         function moveKingSaveToGlobalCache(el) {
-          if (el.className === 'white-king') {
-            cache.moveWhiteKing();
-          } else if (el.className === 'black-king') {
-            cache.moveBlackKing();
-          }
+          cache.moveKing(el.className.substr(0, el.className.indexOf('-')));
         }
 
-        // TODO fix method
         function moveRockSaveToGLobalCache(el) {
-          if (el.className === 'white-rock' && el.id[0] == 'H') {
-            cache.moveHWhiteRock();
-          } else if (el.className === 'white-rock' && el.id[0] == 'A') {
-            cache.moveAWhiteRock();
-          } else if (el.className === 'black-rock' && el.id[0] == 'H') {
-            cache.moveHBlackRock();
-          } else if (el.className === 'black-rock' && el.id[0] == 'A') {
-            cache.moveABlackRock();
-          }
+          var rockColor = el.className.substr(0, el.className.indexOf('-'));
+          var position = el.id;
+          cache.moveRock(rockColor, position);
         }
 
         function isValidTake(field, piece) {

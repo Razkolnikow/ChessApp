@@ -97,4 +97,28 @@ export class Cache {
   moveWhiteKing() {
     this.whiteKingMoved = true;
   }
+
+  moveKing(pieceColor) {
+    if (pieceColor === 'white') {
+      this.moveWhiteKing();
+    } else {
+      this.moveBlackKing();
+    }
+  }
+
+  moveRock(rockColor, position) {
+    if (rockColor === 'white') {
+      if (position === 'H1') {
+        this.moveHWhiteRock();
+      } else if (position === 'A1') {
+        this.moveAWhiteRock();
+      }
+    } else {
+      if (position === 'A8') {
+        this.moveABlackRock();
+      } else if (position === 'H8') {
+        this.moveHBlackRock();
+      }
+    }
+  }
 }
