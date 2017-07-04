@@ -74,4 +74,28 @@ export class KingAttackScanner {
 
     return false;
   }
+
+  isAttackedFromPawn(fIndex, fNumber, kColor) {
+
+    return false;
+  }
+
+  isAttackedFromKnight(fIndex, fNumber, kColor) {
+
+    return false;
+  }
+
+  isAttackedFromBishop(fIndex, fNumber, kColor) {
+
+    return false;
+  }
+
+  isAttackedFromKing(fIndex, fNumber, kColor) {
+
+    return false;
+  }
+
+  isAttackedFromQueen(fIndex, fNumber, kColor) {
+
+  }
 }
