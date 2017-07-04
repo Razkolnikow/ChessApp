@@ -25,6 +25,10 @@ import {
 } from '../scripts/QueenMoveValidator.js';
 
 import {
+  KingAttackScanner
+} from '../scripts/KingAttackScan.js';
+
+import {
   BlackOrWhiteMoveValidator
 } from '../scripts/MoveCache.js';
 
@@ -39,6 +43,7 @@ import {
 let cache = new Cache();
 let moveTurnValidator = new BlackOrWhiteMoveValidator();
 let printer = new Printer();
+let kingAttackScanner = new KingAttackScanner();
 
 let chessBoard = function createChessBoard() {
   let brown = '#DE923C';
@@ -148,7 +153,8 @@ let chessBoard = function createChessBoard() {
             printer.printMove(lastClickedElement.id, event.target.id);
             return;
           } else if (cache.lastId.length > 0 && validateKingMove(event.target, lastClickedElement, cache) &&
-            lastClickedElement.className.indexOf('king') >= 0 && isValidTake(event.target, lastClickedElement)) {
+            lastClickedElement.className.indexOf('king') >= 0 && isValidTake(event.target, lastClickedElement)
+            && !kingAttackScanner.isAttackedField(event.target, lastClickedElement)) {
               moveKingSaveToGlobalCache(lastClickedElement);
               takePiece();
               printer.printMove(lastClickedElement.id, event.target.id);
@@ -196,7 +202,8 @@ let chessBoard = function createChessBoard() {
               printer.printMove(lastClickedElement.id, event.target.id);
             }
           } else if (lastClickedElement && lastClickedElement.className.indexOf('king') >= 0) {
-            if (validateKingMove(event.target, lastClickedElement, cache)) {
+            if (validateKingMove(event.target, lastClickedElement, cache)
+            && !kingAttackScanner.isAttackedField(event.target, lastClickedElement)) {
               moveKingSaveToGlobalCache(lastClickedElement);
               movePiece();
               printer.printMove(lastClickedElement.id, event.target.id);
