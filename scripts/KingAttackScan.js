@@ -18,6 +18,8 @@ export class KingAttackScanner {
 
     if (this.isAttackedFromRock(fieldIndex, fieldNumber, kingColor)) {
       return true;
+    } else if (this.isAttackedFromPawn(fieldIndex, fieldNumber, kingColor)) {
+      return true;
     }
 
     return false;
@@ -76,9 +78,46 @@ export class KingAttackScanner {
   }
 
   isAttackedFromPawn(fIndex, fNumber, kColor) {
+    let enemyColor = kColor === 'white' ? 'black' : 'white';
+    if (enemyColor === 'white') {
+      let rightPawnIndex = fIndex + 1;
+      let rightPawnNumber = fNumber - 1;
+      let leftPawnIndex = fIndex - 1;
+      let leftPawnNumber = fNumber - 1;
 
-    return false;
-  }
+      let leftWhitePawn = document.getElementById(letters[leftPawnIndex] + leftPawnNumber);
+      let rightWhitePawn = document.getElementById(letters[rightPawnIndex] + rightPawnNumber);
+      if (leftWhitePawn) {
+        if (leftWhitePawn.className.startsWith('white-pawn')) {
+          return true;
+        }
+      }
+
+      if (rightWhitePawn) {
+        if (rightWhitePawn.className.startsWith('white-pawn')) {
+          return true;
+        }
+      }
+    } else {
+        let rightPawnIndex = fIndex + 1;
+        let rightPawnNumber = fNumber + 1;
+        let leftPawnIndex = fIndex - 1;
+        let leftPawnNumber = fNumber + 1;
+
+        let leftBlackPawn = document.getElementById(letters[leftPawnIndex] + leftPawnNumber);
+        let rightBlackPawn = document.getElementById(letters[rightPawnIndex] + rightPawnNumber);
+
+        if (leftBlackPawn && leftBlackPawn.className.startsWith('black-pawn')) {
+            return true;
+          }
+
+        if (rightBlackPawn && rightBlackPawn.className.startsWith('black-pawn')) {
+          return true;
+        }
+      }
+
+      return false;
+    }
 
   isAttackedFromKnight(fIndex, fNumber, kColor) {
 
