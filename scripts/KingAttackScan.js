@@ -20,6 +20,14 @@ export class KingAttackScanner {
       return true;
     } else if (this.isAttackedFromPawn(fieldIndex, fieldNumber, kingColor)) {
       return true;
+    } else if (this.isAttackedFromBishop(fieldIndex, fieldNumber, kingColor)) {
+      return true;
+    } else if (this.isAttackedFromKing(fieldIndex, fieldNumber, kingColor)) {
+      return true;
+    } else if (this.isAttackedFromKnight(fieldIndex, fieldNumber, kingColor)) {
+      return true;
+    } else if (this.isAttackedFromQueen(fieldIndex, fieldNumber, kingColor)) {
+      return true;
     }
 
     return false;
