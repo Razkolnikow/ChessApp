@@ -140,14 +140,14 @@ export class KingAttackScanner {
 
     let enemyClassName = enemyColor + '-knight';
 
-    if(firstKnight && firstKnight.className.startsWith(enemyClassName)) return true;
-    if(secondKnight && secondKnight.className.startsWith(enemyClassName)) return true;
-    if(thirthKnight && thirthKnight.className.startsWith(enemyClassName)) return true;
-    if(fourthKnight && fourthKnight.className.startsWith(enemyClassName)) return true;
-    if(fifthKnight && fifthKnight.className.startsWith(enemyClassName)) return true;
-    if(sixthKnight && sixthKnight.className.startsWith(enemyClassName)) return true;
-    if(seventhKnight && seventhKnight.className.startsWith(enemyClassName)) return true;
-    if(eightKnight && eightKnight.className.startsWith(enemyClassName)) return true;
+    if (firstKnight && firstKnight.className.startsWith(enemyClassName)) return true;
+    if (secondKnight && secondKnight.className.startsWith(enemyClassName)) return true;
+    if (thirthKnight && thirthKnight.className.startsWith(enemyClassName)) return true;
+    if (fourthKnight && fourthKnight.className.startsWith(enemyClassName)) return true;
+    if (fifthKnight && fifthKnight.className.startsWith(enemyClassName)) return true;
+    if (sixthKnight && sixthKnight.className.startsWith(enemyClassName)) return true;
+    if (seventhKnight && seventhKnight.className.startsWith(enemyClassName)) return true;
+    if (eightKnight && eightKnight.className.startsWith(enemyClassName)) return true;
 
     return false;
   }
@@ -158,6 +158,26 @@ export class KingAttackScanner {
   }
 
   isAttackedFromKing(fIndex, fNumber, kColor) {
+    let enemyColor = kColor === 'white' ? 'black' : 'white';
+    let left = document.getElementById(letters[fIndex - 1] + fNumber);
+    let right = document.getElementById(letters[fIndex + 1] + fNumber);
+    let up = document.getElementById(letters[fIndex] + (fNumber + 1));
+    let down = document.getElementById(letters[fIndex] + (fNumber - 1));
+    let leftUp = document.getElementById(letters[fIndex - 1] + (fNumber + 1));
+    let rightUp = document.getElementById(letters[fIndex + 1] + (fNumber + 1));
+    let leftDown = document.getElementById(letters[fIndex - 1] + (fNumber - 1));
+    let rightDown = document.getElementById(letters[fIndex + 1] + (fNumber - 1));
+
+    let enemyClassName = enemyColor + '-king';
+
+    if (left && left.className.startsWith(enemyClassName)) return true;
+    if (right && right.className.startsWith(enemyClassName)) return true;
+    if (up && up.className.startsWith(enemyClassName)) return true;
+    if (down && down.className.startsWith(enemyClassName)) return true;
+    if (leftUp && leftUp.className.startsWith(enemyClassName)) return true;
+    if (rightUp && rightUp.className.startsWith(enemyClassName)) return true;
+    if (leftDown && leftDown.className.startsWith(enemyClassName)) return true;
+    if (rightDown && rightDown.className.startsWith(enemyClassName)) return true;
 
     return false;
   }
