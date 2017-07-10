@@ -36,7 +36,9 @@ export class KingAttackScanner {
   isAttackedFromRock(fIndex, fNumber, kColor) {
     for (let i = fNumber + 1; i < 9; i++) {
       let nextField = document.getElementById(letters[fIndex] + i);
-      if (nextField.className.length > 0 && nextField.className.indexOf('rock') >= 0) {
+      if (nextField.className.length > 0
+        && (nextField.className.indexOf('rock') >= 0
+        || nextField.className.indexOf('queen') >= 0)) {
         let pieceColor = this.getColor(nextField);
         if (kColor !== pieceColor) {
           return true;
@@ -48,7 +50,9 @@ export class KingAttackScanner {
 
     for (let i = fNumber - 1; i > 0; i--) {
       let nextField = document.getElementById(letters[fIndex] + i);
-      if (nextField.className.length > 0 && nextField.className.indexOf('rock') >= 0) {
+      if (nextField.className.length > 0
+        && (nextField.className.indexOf('rock') >= 0
+        || nextField.className.indexOf('queen') >= 0)) {
         let pieceColor = this.getColor(nextField);
         if (kColor !== pieceColor) {
           return true;
@@ -60,7 +64,9 @@ export class KingAttackScanner {
 
     for (let i = fIndex + 1; i < letters.length; i++) {
       let nextField = document.getElementById(letters[i] + fNumber);
-      if (nextField.className.length > 0 && nextField.className.indexOf('rock') >= 0) {
+      if (nextField.className.length > 0
+        && (nextField.className.indexOf('rock') >= 0
+        || nextField.className.indexOf('queen') >= 0)) {
         let pieceColor = this.getColor(nextField);
         if (kColor !== pieceColor) {
           return true;
@@ -72,7 +78,9 @@ export class KingAttackScanner {
 
     for (let i = fIndex - 1; i >= 0; i--) {
       let nextField = document.getElementById(letters[i] + fNumber);
-      if (nextField.className.length > 0 && nextField.className.indexOf('rock') >= 0) {
+      if (nextField.className.length > 0
+        && (nextField.className.indexOf('rock') >= 0
+        || nextField.className.indexOf('queen') >= 0)) {
         let pieceColor = this.getColor(nextField);
         if (kColor !== pieceColor) {
           return true;
@@ -152,7 +160,54 @@ export class KingAttackScanner {
     return false;
   }
 
-  isAttackedFromBishop(fIndex, fNumber, kColor) {
+  isAttackedFromBishop(fIndex, fNumber, kColor, isQueen) {
+    let enemyColor = kColor === 'white' ? 'black' : 'white';
+    let enemyClassName = enemyColor + '-bishop';
+    if (isQueen) enemyClassName = enemyColor + '-queen';
+    let leftIndex = fIndex - 1;
+    let rightIndex = fIndex + 1;
+    let downNum = fNumber - 1;
+    let upNum = fNumber + 1;
+
+    // Check LeftUp Diagonal
+    let up = upNum;
+    for (let i = leftIndex; i >= 0; i--) {
+      let field = document.getElementById(letters[i] + up);
+      if (field.className.startsWith(enemyClassName)) return true;
+      if (field && field.className.length > 0) break;
+      up++;
+      if (up > 8) break;
+    }
+
+    up = upNum;
+    let down = downNum;
+    // Check LeftDown Diagonal
+    for (let i = leftIndex; i >= 0; i--) {
+      let field = document.getElementById(letters[i] + down);
+      if (field && field.className.startsWith(enemyClassName)) return true;
+      if (field && field.className.length > 0) break;
+      down--;
+      if (down < 1) break;
+    }
+
+    down = downNum;
+    // Check RightUp Diagonal
+    for (let i = rightIndex; i < 8; i++) {
+      let field = document.getElementById(letters[i] + up);
+      if (field && field.className.startsWith(enemyClassName)) return true;
+      if (field && field.className.length > 0) break;
+      up++;
+      if (up > 8) break;
+    }
+
+    // Check RightDown Diagonal
+    for (let i = rightIndex; i < 8; i++) {
+      let field = document.getElementById(letters[i] + down);
+      if (field && field.className.startsWith(enemyClassName)) return true;
+      if (field && field.className.length > 0) break;
+      down--;
+      if (down < 1) break;
+    }
 
     return false;
   }
@@ -183,6 +238,9 @@ export class KingAttackScanner {
   }
 
   isAttackedFromQueen(fIndex, fNumber, kColor) {
+    if (this.isAttackedFromRock(fIndex, fNumber, kColor)) return true;
+    if (this.isAttackedFromBishop(fIndex, fNumber, kColor, true)) return true;
 
+    return false;
   }
 }
