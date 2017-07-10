@@ -128,6 +128,26 @@ export class KingAttackScanner {
     }
 
   isAttackedFromKnight(fIndex, fNumber, kColor) {
+    let enemyColor = kColor === 'white' ? 'black' : 'white';
+    let firstKnight = document.getElementById(letters[fIndex + 1] + (fNumber - 2));
+    let secondKnight = document.getElementById(letters[fIndex - 1] + (fNumber - 2));
+    let thirthKnight = document.getElementById(letters[fIndex + 1] + (fNumber + 2));
+    let fourthKnight = document.getElementById(letters[fIndex - 1] + (fNumber + 2));
+    let fifthKnight = document.getElementById(letters[fIndex  - 2] + (fNumber - 1));
+    let sixthKnight = document.getElementById(letters[fIndex - 2] + (fNumber + 1));
+    let seventhKnight = document.getElementById(letters[fIndex + 2] + (fNumber - 1));
+    let eightKnight = document.getElementById(letters[fIndex - 2] + (fNumber + 1));
+
+    let enemyClassName = enemyColor + '-knight';
+
+    if(firstKnight && firstKnight.className.startsWith(enemyClassName)) return true;
+    if(secondKnight && secondKnight.className.startsWith(enemyClassName)) return true;
+    if(thirthKnight && thirthKnight.className.startsWith(enemyClassName)) return true;
+    if(fourthKnight && fourthKnight.className.startsWith(enemyClassName)) return true;
+    if(fifthKnight && fifthKnight.className.startsWith(enemyClassName)) return true;
+    if(sixthKnight && sixthKnight.className.startsWith(enemyClassName)) return true;
+    if(seventhKnight && seventhKnight.className.startsWith(enemyClassName)) return true;
+    if(eightKnight && eightKnight.className.startsWith(enemyClassName)) return true;
 
     return false;
   }
