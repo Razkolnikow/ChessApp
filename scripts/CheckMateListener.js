@@ -6,4 +6,8 @@ export class CheckMateListener {
   constructor() {
     // TODO
   }
+
+  listen() {
+    // TODO
+  }
 }
