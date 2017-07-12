@@ -172,41 +172,41 @@ export class KingAttackScanner {
     // Check LeftUp Diagonal
     let up = upNum;
     for (let i = leftIndex; i >= 0; i--) {
+      if (up > 8) break;
       let field = document.getElementById(letters[i] + up);
       if (field.className.startsWith(enemyClassName)) return true;
       if (field && field.className.length > 0) break;
       up++;
-      if (up > 8) break;
     }
 
     up = upNum;
     let down = downNum;
     // Check LeftDown Diagonal
     for (let i = leftIndex; i >= 0; i--) {
+      if (down < 1) break;
       let field = document.getElementById(letters[i] + down);
       if (field && field.className.startsWith(enemyClassName)) return true;
       if (field && field.className.length > 0) break;
       down--;
-      if (down < 1) break;
     }
 
     down = downNum;
     // Check RightUp Diagonal
     for (let i = rightIndex; i < 8; i++) {
+      if (up > 8) break;
       let field = document.getElementById(letters[i] + up);
       if (field && field.className.startsWith(enemyClassName)) return true;
       if (field && field.className.length > 0) break;
       up++;
-      if (up > 8) break;
     }
 
     // Check RightDown Diagonal
     for (let i = rightIndex; i < 8; i++) {
+      if (down < 1) break;
       let field = document.getElementById(letters[i] + down);
       if (field && field.className.startsWith(enemyClassName)) return true;
       if (field && field.className.length > 0) break;
       down--;
-      if (down < 1) break;
     }
 
     return false;

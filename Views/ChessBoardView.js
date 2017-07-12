@@ -40,10 +40,15 @@ import {
   Printer
 } from '../scripts/MovePrinter.js';
 
+import {
+  CheckKingWrapper
+} from '../scripts/ListenersWrapper.js';
+
 let cache = new Cache();
 let moveTurnValidator = new BlackOrWhiteMoveValidator();
 let printer = new Printer();
 let kingAttackScanner = new KingAttackScanner();
+let checkKingWrapper = new CheckKingWrapper();
 
 let chessBoard = function createChessBoard() {
   let brown = '#DE923C';
@@ -242,6 +247,11 @@ let chessBoard = function createChessBoard() {
           lastClickedElement.style.backgroundColor = cache.lastColor;
           cache.lastColor = -1;
           cache.lastId = '';
+
+          // Test
+          let wantedColor = lastClickedElement.className.startsWith('white') ? 'white' : 'black';
+          let field = document.getElementsByClassName(wantedColor + '-king')[0];
+          checkKingWrapper.listen(field);
         }
 
         function moveKingSaveToGlobalCache(el) {
