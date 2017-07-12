@@ -11,7 +11,7 @@ export class CheckListener {
     this._scanner = new KingAttackScanner();
   }
 
-  listen(field) {
+  listen(field) { 
     let fieldIndex = letters.indexOf(field.id[0]);
     let fieldNumber = Number(field.id[1]);
     let kingColor = this._scanner.getColor(field);

@@ -5,7 +5,7 @@ import {
 import {
   CheckMateListener
 } from './CheckMateListener.js';
-
+ 
 import jquery from 'jquery';
 
 export class CheckKingWrapper {

@@ -251,7 +251,7 @@ let chessBoard = function createChessBoard() {
           // Test
           let wantedColor = lastClickedElement.className.startsWith('white') ? 'white' : 'black';
           let field = document.getElementsByClassName(wantedColor + '-king')[0];
-          checkKingWrapper.listen(field);
+          checkKingWrapper.listen(field); 
         }
 
         function moveKingSaveToGlobalCache(el) {

@@ -223,7 +223,7 @@ export class KingAttackScanner {
     let leftDown = document.getElementById(letters[fIndex - 1] + (fNumber - 1));
     let rightDown = document.getElementById(letters[fIndex + 1] + (fNumber - 1));
 
-    let enemyClassName = enemyColor + '-king';
+    let enemyClassName = enemyColor + '-king'; 
 
     if (left && left.className.startsWith(enemyClassName)) return true;
     if (right && right.className.startsWith(enemyClassName)) return true;
