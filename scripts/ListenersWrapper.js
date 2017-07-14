@@ -5,7 +5,7 @@ import {
 import {
   CheckMateListener
 } from './CheckMateListener.js';
- 
+
 import jquery from 'jquery';
 
 export class CheckKingWrapper {
@@ -29,5 +29,14 @@ export class CheckKingWrapper {
     }
 
     // TODO
+  }
+
+  getEnemyColor(className) {
+    let color = className.substr(0, className.indexOf('-'));
+    if (color === 'white') {
+      return 'black';
+    } else {
+      return 'white'
+    }
   }
 }

@@ -236,6 +236,9 @@ let chessBoard = function createChessBoard() {
           lastClickedElement.style.backgroundColor = cache.lastColor;
           cache.lastColor = -1;
           cache.lastId = '';
+
+          // Test Check
+          checkForCheck();
         }
 
         function movePiece() {
@@ -248,10 +251,14 @@ let chessBoard = function createChessBoard() {
           cache.lastColor = -1;
           cache.lastId = '';
 
-          // Test
-          let wantedColor = lastClickedElement.className.startsWith('white') ? 'white' : 'black';
+          // Test Check
+          checkForCheck();
+        }
+
+        function checkForCheck() {
+          let wantedColor = checkKingWrapper.getEnemyColor(event.target.className);
           let field = document.getElementsByClassName(wantedColor + '-king')[0];
-          checkKingWrapper.listen(field); 
+          checkKingWrapper.listen(field);
         }
 
         function moveKingSaveToGlobalCache(el) {
