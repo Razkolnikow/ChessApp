@@ -39,4 +39,8 @@ export class CheckKingWrapper {
       return 'white'
     }
   }
+
+  getCurrentColor(className) {
+    return className.substr(0, className.indexOf('-'));
+  }
 }
