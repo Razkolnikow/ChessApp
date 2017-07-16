@@ -25,7 +25,7 @@ export class CheckKingWrapper {
       this._infoWriter.write('Check!')
       // TODO
       this._cache.setCheckedKing(field);
-      if (this._cache.blackKingCheck) // TODO
+      if (this._cache.blackKingCheck) // TODO get the king to move if check exists, no other moves should be legal!!!
     } else if (this._checkMateListener.listen(field)) {
       this._infoWriter.write('Checkmate!');
       // TODO
