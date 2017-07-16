@@ -259,6 +259,10 @@ let chessBoard = function createChessBoard() {
           let wantedColor = checkKingWrapper.getEnemyColor(event.target.className);
           let field = document.getElementsByClassName(wantedColor + '-king')[0];
           checkKingWrapper.listen(field);
+          // Listen for check for other king
+          let secondWantedColor = wantedColor === 'white' ? 'black' : 'white';
+          field = document.getElementsByClassName(secondWantedColor + '-king')[0];
+          checkKingWrapper.listen(field);
         }
 
         function moveKingSaveToGlobalCache(el) {
