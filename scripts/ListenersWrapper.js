@@ -13,16 +13,19 @@ import {
 } from './InfoWriter.js';
 
 export class CheckKingWrapper {
-  constructor() {
+  constructor(cache) {
     this._checkListener = new CheckListener();
     this._checkMateListener = new CheckMateListener();
     this._infoWriter = new InfoWriter();
+    this._cache = cache;
   }
 
   listen(field) {
     if (this._checkListener.listen(field)) {
       this._infoWriter.write('Check!')
       // TODO
+      this._cache.setCheckedKing(field);
+      if (this._cache.blackKingCheck) // TODO
     } else if (this._checkMateListener.listen(field)) {
       this._infoWriter.write('Checkmate!');
       // TODO

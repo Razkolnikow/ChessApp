@@ -48,7 +48,7 @@ let cache = new Cache();
 let moveTurnValidator = new BlackOrWhiteMoveValidator();
 let printer = new Printer();
 let kingAttackScanner = new KingAttackScanner();
-let checkKingWrapper = new CheckKingWrapper();
+let checkKingWrapper = new CheckKingWrapper(cache);
 
 let chessBoard = function createChessBoard() {
   let brown = '#DE923C';

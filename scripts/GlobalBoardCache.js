@@ -28,6 +28,27 @@ export class Cache {
     this._whiteKingCheck = val;
   }
 
+  setCheckedKing(field) {
+    // TODO
+    let color = field.className.substr(0, field.className.indexOf('-'));
+    if (color === 'white') {
+      this.whiteKingCheck = true;
+    } else {
+      this.blackKingCheck = true;
+    }
+  }
+
+  // King is check returns color of king which is checked or false
+  kingIsCheck() {
+    if (this.whiteKingCheck) {
+      return 'white';
+    } else if (this.blackKingCheck) {
+      return 'black';
+    } else {
+      return false;
+    }
+  }
+
   get lastId() {
     return this._lastId;
   }
