@@ -8,23 +8,23 @@ import {
 
 import jquery from 'jquery';
 
+import {
+  InfoWriter
+} from './InfoWriter.js';
+
 export class CheckKingWrapper {
   constructor() {
     this._checkListener = new CheckListener();
     this._checkMateListener = new CheckMateListener();
+    this._infoWriter = new InfoWriter();
   }
 
   listen(field) {
     if (this._checkListener.listen(field)) {
+      this._infoWriter.write('Check!')
       // TODO
-      showInfo('Check!')
-      function showInfo(msg) {
-        $('#infoBox').text(msg).show();
-        setTimeout(function() {
-          $('#infoBox').fadeOut(500);
-        }, 3000);
-      }
     } else if (this._checkMateListener.listen(field)) {
+      this._infoWriter.write('Checkmate!');
       // TODO
     }
 

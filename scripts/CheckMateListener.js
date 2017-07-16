@@ -3,11 +3,13 @@ import {
 } from './KingAttackScan.js';
 
 export class CheckMateListener {
-  constructor() { 
+  constructor() {
     // TODO
   }
 
   listen() {
     // TODO
+
+    return false;
   }
 }

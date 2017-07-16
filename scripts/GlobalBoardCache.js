@@ -8,6 +8,24 @@ export class Cache {
     this._aWhiteRockMoved = false;
     this._aBlackRockMoved = false;
     this._hBlackRockMoved = false;
+    this._blackKingCheck = false;
+    this._whiteKingCheck = false;
+  }
+
+  get blackKingCheck() {
+    return this._blackKingCheck;
+  }
+
+  set blackKingCheck(val) {
+    this._blackKingCheck = val;
+  }
+
+  get whiteKingCheck() {
+    return this._whiteKingCheck;
+  }
+
+  set whiteKingCheck(val) {
+    this._whiteKingCheck = val;
   }
 
   get lastId() {
