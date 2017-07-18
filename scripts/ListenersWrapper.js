@@ -20,13 +20,23 @@ export class CheckKingWrapper {
     this._cache = cache;
   }
 
-  listen(field) {
+  listen(field, enemyFigure) {
     if (this._checkListener.listen(field)) {
       this._infoWriter.write('Check!')
       // TODO
       this._cache.setCheckedKing(field);
       if (this._cache.blackKingCheck) {
         // TODO get the king to move if check exists, no other moves should be legal!!!
+        $('td').addClass('unclickable');
+        $('.black-king').removeClass('unclickable');
+        $(enemyFigure).removeClass('unclickable')
+
+        let kingIsNotMate = true;
+        // TODO should check if the enemyAttacker has reinforcment and should check which figures
+        // are capable of removing the ckeck threat by taking the enemy piece!!!
+        $('td').removeClass('unclickable')
+      } else {
+
       }
     } else if (this._checkMateListener.listen(field)) {
       this._infoWriter.write('Checkmate!');

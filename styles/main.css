@@ -136,3 +136,7 @@ td {
   font-size: 1.3em;
   font-family: Arial;
 }
+
+.unclickable {
+  pointer-events: none;
+}
