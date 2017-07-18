@@ -12,12 +12,17 @@ import {
   InfoWriter
 } from './InfoWriter.js';
 
+import {
+  ReinforcmentsScanner
+} from './ScanForReinforcments.js';
+
 export class CheckKingWrapper {
   constructor(cache) {
     this._checkListener = new CheckListener();
     this._checkMateListener = new CheckMateListener();
     this._infoWriter = new InfoWriter();
     this._cache = cache;
+    this._reinforcmentsScanner = new ReinforcmentsScanner();
   }
 
   listen(field, enemyFigure) {
@@ -30,11 +35,18 @@ export class CheckKingWrapper {
         $('td').addClass('unclickable');
         $('.black-king').removeClass('unclickable');
         $(enemyFigure).removeClass('unclickable')
+        let isEnemyReinforced = this._reinforcmentsScanner
+          .scan(enemyFigure);
+        if (isEnemyReinforced) {
+          // TODO should scan for pieces who can help the king
+        } else {
+          // TODO CheckMate
+        }
 
         let kingIsNotMate = true;
         // TODO should check if the enemyAttacker has reinforcment and should check which figures
         // are capable of removing the ckeck threat by taking the enemy piece!!!
-        $('td').removeClass('unclickable')
+        if (kingIsNotMate) $('td').removeClass('unclickable');
       } else {
 
       }
