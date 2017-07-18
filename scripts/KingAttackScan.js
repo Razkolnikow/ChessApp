@@ -11,9 +11,9 @@ export class KingAttackScanner {
     return el.className.substr(0, el.className.indexOf('-'));
   }
 
-  isAttackedField(field, king) {
-    let fieldIndex = letters.indexOf(field.id[0]);
-    let fieldNumber = Number(field.id[1]);
+  isAttackedField(fieldAttacked, king) {
+    let fieldIndex = letters.indexOf(fieldAttacked.id[0]);
+    let fieldNumber = Number(fieldAttacked.id[1]);
     let kingColor = this.getColor(king);
 
     if (this.isAttackedFromRock(fieldIndex, fieldNumber, kingColor)) {
@@ -173,9 +173,9 @@ export class KingAttackScanner {
     let up = upNum;
     for (let i = leftIndex; i >= 0; i--) {
       if (up > 8) break;
-      let field = document.getElementById(letters[i] + up);
-      if (field.className.startsWith(enemyClassName)) return true;
-      if (field && field.className.length > 0) break;
+      let fieldUp = document.getElementById(letters[i] + up);
+      if (fieldUp.className.startsWith(enemyClassName)) return true;
+      if (fieldUp && fieldUp.className.indexOf('-') > 0) break;
       up++;
     }
 
@@ -186,7 +186,7 @@ export class KingAttackScanner {
       if (down < 1) break;
       let field = document.getElementById(letters[i] + down);
       if (field && field.className.startsWith(enemyClassName)) return true;
-      if (field && field.className.length > 0) break;
+      if (field && field.className.indexOf('-') > 0) break;
       down--;
     }
 
@@ -194,18 +194,18 @@ export class KingAttackScanner {
     // Check RightUp Diagonal
     for (let i = rightIndex; i < 8; i++) {
       if (up > 8) break;
-      let field = document.getElementById(letters[i] + up);
-      if (field && field.className.startsWith(enemyClassName)) return true;
-      if (field && field.className.length > 0) break;
+      let fieldR = document.getElementById(letters[i] + up);
+      if (fieldR && fieldR.className.startsWith(enemyClassName)) return true;
+      if (fieldR && fieldR.className.indexOf('-') > 0) break;
       up++;
     }
 
     // Check RightDown Diagonal
     for (let i = rightIndex; i < 8; i++) {
       if (down < 1) break;
-      let field = document.getElementById(letters[i] + down);
-      if (field && field.className.startsWith(enemyClassName)) return true;
-      if (field && field.className.length > 0) break;
+      let fieldS = document.getElementById(letters[i] + down);
+      if (fieldS && fieldS.className.startsWith(enemyClassName)) return true;
+      if (fieldS && fieldS.className.indexOf('-') > 0) break;
       down--;
     }
 
@@ -223,7 +223,7 @@ export class KingAttackScanner {
     let leftDown = document.getElementById(letters[fIndex - 1] + (fNumber - 1));
     let rightDown = document.getElementById(letters[fIndex + 1] + (fNumber - 1));
 
-    let enemyClassName = enemyColor + '-king'; 
+    let enemyClassName = enemyColor + '-king';
 
     if (left && left.className.startsWith(enemyClassName)) return true;
     if (right && right.className.startsWith(enemyClassName)) return true;
