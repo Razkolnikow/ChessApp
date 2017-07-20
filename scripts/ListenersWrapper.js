@@ -29,6 +29,7 @@ export class CheckKingWrapper {
     if (this._checkListener.listen(field)) {
       let kingIsNotMate = true;
       this._infoWriter.write('Check!')
+      this._cache.setCheckCounter();
       // TODO
       this._cache.setCheckedKing(field);
       if (this._cache.blackKingCheck) {
@@ -43,15 +44,25 @@ export class CheckKingWrapper {
           let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
           // TODO the method should return which pieces can help and should free them from
           // unclickable class to help their king
+          // if canHelpTheKing is false, then should check for king movements.
+          // If no legal moves are available - Checkmate!
+          // TODO should implement functionality to be able to defend check from distance with
+          // other pieces.
+          for (let i = 0; i < canHelpTheKing.length; i++) {
+            $(canHelpTheKing[i]).removeClass('unclickable');
+          }
+
+
         } else {
-          // TODO CheckMate
+          // TODO
+
         }
 
         // TODO should check if the enemyAttacker has reinforcment and should check which figures
         // are capable of removing the ckeck threat by taking the enemy piece!!!
-        if (kingIsNotMate) $('td').removeClass('unclickable');
+        //if (kingIsNotMate) $('td').removeClass('unclickable');
       } else {
-
+        // TODO white king check logic here
       }
     } else if (this._checkMateListener.listen(field)) {
       this._infoWriter.write('Checkmate!');

@@ -1,3 +1,5 @@
+import jquery from 'jquery';
+
 export class Cache {
   constructor() {
     this._lastId = '';
@@ -10,6 +12,19 @@ export class Cache {
     this._hBlackRockMoved = false;
     this._blackKingCheck = false;
     this._whiteKingCheck = false;
+    this._counterAfterCheck = 0;
+    this._isCheckmate = false;
+  }
+
+  setCheckCounter() {
+    this._counterAfterCheck++;
+  }
+
+  freePiecesMovement() {
+    if (this._counterAfterCheck > 0 && !this._isCheckmate) {
+      $('td').removeClass('unclickable');
+      this._counterAfterCheck = 0;
+    }
   }
 
   get blackKingCheck() {

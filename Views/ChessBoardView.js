@@ -238,6 +238,7 @@ let chessBoard = function createChessBoard() {
           cache.lastId = '';
 
           // Test Check
+          cache.freePiecesMovement();
           checkForCheck();
         }
 
@@ -252,6 +253,7 @@ let chessBoard = function createChessBoard() {
           cache.lastId = '';
 
           // Test Check
+          cache.freePiecesMovement();
           checkForCheck();
         }
 

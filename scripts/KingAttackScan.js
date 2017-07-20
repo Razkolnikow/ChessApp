@@ -35,57 +35,57 @@ export class KingAttackScanner {
 
   isAttackedFromRock(fIndex, fNumber, kColor) {
     for (let i = fNumber + 1; i < 9; i++) {
-      let nextField = document.getElementById(letters[fIndex] + i);
-      if (nextField.className.length > 0
-        && (nextField.className.indexOf('rock') >= 0
-        || nextField.className.indexOf('queen') >= 0)) {
-        let pieceColor = this.getColor(nextField);
+      let nextField1 = document.getElementById(letters[fIndex] + i);
+      if (nextField1.className.length > 0
+        && (nextField1.className.indexOf('rock') >= 0
+        || nextField1.className.indexOf('queen') >= 0)) {
+        let pieceColor = this.getColor(nextField1);
         if (kColor !== pieceColor) {
-          return true;
+          return nextField1;
         }
-      } else if (nextField.className.length > 0) {
+      } else if (nextField1.className.length > 0) {
         break;
       }
     }
 
     for (let i = fNumber - 1; i > 0; i--) {
-      let nextField = document.getElementById(letters[fIndex] + i);
-      if (nextField.className.length > 0
-        && (nextField.className.indexOf('rock') >= 0
-        || nextField.className.indexOf('queen') >= 0)) {
-        let pieceColor = this.getColor(nextField);
+      let nextField2 = document.getElementById(letters[fIndex] + i);
+      if (nextField2.className.length > 0
+        && (nextField2.className.indexOf('rock') >= 0
+        || nextField2.className.indexOf('queen') >= 0)) {
+        let pieceColor = this.getColor(nextField2);
         if (kColor !== pieceColor) {
-          return true;
+          return nextField2;
         }
-      } else if (nextField.className.length > 0) {
+      } else if (nextField2.className.length > 0) {
         break;
       }
     }
 
     for (let i = fIndex + 1; i < letters.length; i++) {
-      let nextField = document.getElementById(letters[i] + fNumber);
-      if (nextField.className.length > 0
-        && (nextField.className.indexOf('rock') >= 0
-        || nextField.className.indexOf('queen') >= 0)) {
-        let pieceColor = this.getColor(nextField);
+      let nextField3 = document.getElementById(letters[i] + fNumber);
+      if (nextField3.className.length > 0
+        && (nextField3.className.indexOf('rock') >= 0
+        || nextField3.className.indexOf('queen') >= 0)) {
+        let pieceColor = this.getColor(nextField3);
         if (kColor !== pieceColor) {
           return true;
         }
-      } else if (nextField.className.length > 0) {
+      } else if (nextField3.className.length > 0) {
         break;
       }
     }
 
     for (let i = fIndex - 1; i >= 0; i--) {
-      let nextField = document.getElementById(letters[i] + fNumber);
-      if (nextField.className.length > 0
-        && (nextField.className.indexOf('rock') >= 0
-        || nextField.className.indexOf('queen') >= 0)) {
-        let pieceColor = this.getColor(nextField);
+      let nextField4 = document.getElementById(letters[i] + fNumber);
+      if (nextField4.className.length > 0
+        && (nextField4.className.indexOf('rock') >= 0
+        || nextField4.className.indexOf('queen') >= 0)) {
+        let pieceColor = this.getColor(nextField4);
         if (kColor !== pieceColor) {
           return true;
         }
-      } else if (nextField.className.length > 0) {
+      } else if (nextField4.className.length > 0) {
         break;
       }
     }
@@ -105,13 +105,13 @@ export class KingAttackScanner {
       let rightWhitePawn = document.getElementById(letters[rightPawnIndex] + rightPawnNumber);
       if (leftWhitePawn) {
         if (leftWhitePawn.className.startsWith('white-pawn')) {
-          return true;
+          return leftWhitePawn;
         }
       }
 
       if (rightWhitePawn) {
         if (rightWhitePawn.className.startsWith('white-pawn')) {
-          return true;
+          return rightWhitePawn;
         }
       }
     } else {
@@ -124,11 +124,11 @@ export class KingAttackScanner {
         let rightBlackPawn = document.getElementById(letters[rightPawnIndex] + rightPawnNumber);
 
         if (leftBlackPawn && leftBlackPawn.className.startsWith('black-pawn')) {
-            return true;
+            return leftBlackPawn;
           }
 
         if (rightBlackPawn && rightBlackPawn.className.startsWith('black-pawn')) {
-          return true;
+          return rightBlackPawn;
         }
       }
 
@@ -148,14 +148,14 @@ export class KingAttackScanner {
 
     let enemyClassName = enemyColor + '-knight';
 
-    if (firstKnight && firstKnight.className.startsWith(enemyClassName)) return true;
-    if (secondKnight && secondKnight.className.startsWith(enemyClassName)) return true;
-    if (thirthKnight && thirthKnight.className.startsWith(enemyClassName)) return true;
-    if (fourthKnight && fourthKnight.className.startsWith(enemyClassName)) return true;
-    if (fifthKnight && fifthKnight.className.startsWith(enemyClassName)) return true;
-    if (sixthKnight && sixthKnight.className.startsWith(enemyClassName)) return true;
-    if (seventhKnight && seventhKnight.className.startsWith(enemyClassName)) return true;
-    if (eightKnight && eightKnight.className.startsWith(enemyClassName)) return true;
+    if (firstKnight && firstKnight.className.startsWith(enemyClassName)) return firstKnight;
+    if (secondKnight && secondKnight.className.startsWith(enemyClassName)) return secondKnight;
+    if (thirthKnight && thirthKnight.className.startsWith(enemyClassName)) return thirthKnight;
+    if (fourthKnight && fourthKnight.className.startsWith(enemyClassName)) return fourthKnight;
+    if (fifthKnight && fifthKnight.className.startsWith(enemyClassName)) return fifthKnight;
+    if (sixthKnight && sixthKnight.className.startsWith(enemyClassName)) return sixthKnight;
+    if (seventhKnight && seventhKnight.className.startsWith(enemyClassName)) return seventhKnight;
+    if (eightKnight && eightKnight.className.startsWith(enemyClassName)) return eightKnight;
 
     return false;
   }
@@ -174,7 +174,7 @@ export class KingAttackScanner {
     for (let i = leftIndex; i >= 0; i--) {
       if (up > 8) break;
       let fieldUp = document.getElementById(letters[i] + up);
-      if (fieldUp.className.startsWith(enemyClassName)) return true;
+      if (fieldUp.className.startsWith(enemyClassName)) return fieldUp;
       if (fieldUp && fieldUp.className.indexOf('-') > 0) break;
       up++;
     }
@@ -185,7 +185,7 @@ export class KingAttackScanner {
     for (let i = leftIndex; i >= 0; i--) {
       if (down < 1) break;
       let field = document.getElementById(letters[i] + down);
-      if (field && field.className.startsWith(enemyClassName)) return true;
+      if (field && field.className.startsWith(enemyClassName)) return field;
       if (field && field.className.indexOf('-') > 0) break;
       down--;
     }
@@ -195,7 +195,7 @@ export class KingAttackScanner {
     for (let i = rightIndex; i < 8; i++) {
       if (up > 8) break;
       let fieldR = document.getElementById(letters[i] + up);
-      if (fieldR && fieldR.className.startsWith(enemyClassName)) return true;
+      if (fieldR && fieldR.className.startsWith(enemyClassName)) return fieldR;
       if (fieldR && fieldR.className.indexOf('-') > 0) break;
       up++;
     }
@@ -204,7 +204,7 @@ export class KingAttackScanner {
     for (let i = rightIndex; i < 8; i++) {
       if (down < 1) break;
       let fieldS = document.getElementById(letters[i] + down);
-      if (fieldS && fieldS.className.startsWith(enemyClassName)) return true;
+      if (fieldS && fieldS.className.startsWith(enemyClassName)) return fieldS;
       if (fieldS && fieldS.className.indexOf('-') > 0) break;
       down--;
     }
@@ -238,8 +238,10 @@ export class KingAttackScanner {
   }
 
   isAttackedFromQueen(fIndex, fNumber, kColor) {
-    if (this.isAttackedFromRock(fIndex, fNumber, kColor)) return true;
-    if (this.isAttackedFromBishop(fIndex, fNumber, kColor, true)) return true;
+    let fieldRock = this.isAttackedFromRock(fIndex, fNumber, kColor);
+    if (fieldRock) return fieldRock;
+    let fieldBishop = this.isAttackedFromBishop(fIndex, fNumber, kColor, true);
+    if (fieldBishop) return fieldBishop;
 
     return false;
   }
