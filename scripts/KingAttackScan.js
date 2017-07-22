@@ -69,7 +69,7 @@ export class KingAttackScanner {
         || nextField3.className.indexOf('queen') >= 0)) {
         let pieceColor = this.getColor(nextField3);
         if (kColor !== pieceColor) {
-          return true;
+          return nextField3;
         }
       } else if (nextField3.className.length > 0) {
         break;
@@ -83,7 +83,7 @@ export class KingAttackScanner {
         || nextField4.className.indexOf('queen') >= 0)) {
         let pieceColor = this.getColor(nextField4);
         if (kColor !== pieceColor) {
-          return true;
+          return nextField4;
         }
       } else if (nextField4.className.length > 0) {
         break;
@@ -225,14 +225,14 @@ export class KingAttackScanner {
 
     let enemyClassName = enemyColor + '-king';
 
-    if (left && left.className.startsWith(enemyClassName)) return true;
-    if (right && right.className.startsWith(enemyClassName)) return true;
-    if (up && up.className.startsWith(enemyClassName)) return true;
-    if (down && down.className.startsWith(enemyClassName)) return true;
-    if (leftUp && leftUp.className.startsWith(enemyClassName)) return true;
-    if (rightUp && rightUp.className.startsWith(enemyClassName)) return true;
-    if (leftDown && leftDown.className.startsWith(enemyClassName)) return true;
-    if (rightDown && rightDown.className.startsWith(enemyClassName)) return true;
+    if (left && left.className.startsWith(enemyClassName)) return left;
+    if (right && right.className.startsWith(enemyClassName)) return right;
+    if (up && up.className.startsWith(enemyClassName)) return up;
+    if (down && down.className.startsWith(enemyClassName)) return down;
+    if (leftUp && leftUp.className.startsWith(enemyClassName)) return leftUp;
+    if (rightUp && rightUp.className.startsWith(enemyClassName)) return rightUp;
+    if (leftDown && leftDown.className.startsWith(enemyClassName)) return leftDown;
+    if (rightDown && rightDown.className.startsWith(enemyClassName)) return rightDown;
 
     return false;
   }
