@@ -44,6 +44,7 @@ export class CheckKingWrapper {
           let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
           // TODO the method should return which pieces can help and should free them from
           // unclickable class to help their king
+          // TODO Should check if the king can move to safe field!!!
           // if canHelpTheKing is false, then should check for king movements.
           // If no legal moves are available - Checkmate!
           // TODO should implement functionality to be able to defend check from distance with
