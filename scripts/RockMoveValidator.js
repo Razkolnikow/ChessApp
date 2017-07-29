@@ -8,13 +8,15 @@ function validateRockMove(field, piece) {
   if (fieldLetterIndex === pieceLetterIndex) {
     if (fieldNumber > pieceNumber) {
       for (let i = fieldNumber - 1; i > pieceNumber; i--) {
-        if (document.getElementById(letters[fieldLetterIndex] + i).className.length > 0) {
+        let nextPiece1 = document.getElementById(letters[fieldLetterIndex] + i);
+        if (nextPiece1.className.indexOf('white') >= 0 || nextPiece1.className.indexOf('black') >= 0) {
           return false;
         }
       }
     } else {
       for (let i = pieceNumber - 1; i > fieldNumber; i--) {
-        if (document.getElementById(letters[fieldLetterIndex] + i).className.length > 0) {
+        let nextPiece2 = document.getElementById(letters[fieldLetterIndex] + i);
+        if (nextPiece2.className.indexOf('white') >= 0 || nextPiece2.className.indexOf('black') >= 0) {
           return false;
         }
       }
@@ -26,13 +28,15 @@ function validateRockMove(field, piece) {
   if (fieldNumber === pieceNumber) {
     if (fieldLetterIndex > pieceLetterIndex) {
       for (let i = fieldLetterIndex - 1; i > pieceLetterIndex; i--) {
-        if (document.getElementById(letters[i] + fieldNumber).className.length > 0) {
+        let nextPiece3 = document.getElementById(letters[i] + fieldNumber);
+        if (nextPiece3.className.indexOf('white') >= 0 || nextPiece3.className.indexOf('black') >= 0) {
           return false;
         }
       }
     } else {
       for (let i = pieceLetterIndex - 1; i > fieldLetterIndex; i--) {
-        if (document.getElementById(letters[i] + fieldNumber).className.length > 0) {
+        let nextPiece4 = document.getElementById(letters[i] + fieldNumber);
+        if (nextPiece4.className.indexOf('white') >= 0 || nextPiece4.className.indexOf('black') >= 0) {
           return false;
         }
       }
