@@ -36,12 +36,13 @@ export class CheckKingWrapper {
         // TODO get the king to move if check exists, no other moves should be legal!!!
         $('td').addClass('unclickable');
         $('.black-king').removeClass('unclickable');
-        $(enemy).removeClass('unclickable')
+        $(enemy).removeClass('unclickable');
         // This method works
         let isEnemyReinforced = this._reinforcmentsScanner.scanEnemy(field, enemy);
         if (isEnemyReinforced) {
           // TODO should scan for pieces who can help the king
           let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
+          $(canHelpTheKing).removeClass('unclickable');
           // TODO the method should return which pieces can help and should free them from
           // unclickable class to help their king
           // TODO Should check if the king can move to safe field!!!
@@ -49,9 +50,6 @@ export class CheckKingWrapper {
           // If no legal moves are available - Checkmate!
           // TODO should implement functionality to be able to defend check from distance with
           // other pieces.
-          for (let i = 0; i < canHelpTheKing.length; i++) {
-            $(canHelpTheKing[i]).removeClass('unclickable');
-          }
 
 
         } else {
