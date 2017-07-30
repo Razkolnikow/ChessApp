@@ -16,6 +16,14 @@ import {
   ReinforcmentsScanner
 } from './ScanForReinforcments.js';
 
+import {
+  letters
+} from './Constants.js';
+
+import {
+  KingAttackScanner
+} from './KingAttackScan.js';
+
 export class CheckKingWrapper {
   constructor(cache) {
     this._checkListener = new CheckListener();
@@ -23,6 +31,7 @@ export class CheckKingWrapper {
     this._infoWriter = new InfoWriter();
     this._cache = cache;
     this._reinforcmentsScanner = new ReinforcmentsScanner();
+    this._attackScanner = new KingAttackScanner();
   }
 
   listen(field, enemy) {
@@ -63,7 +72,7 @@ export class CheckKingWrapper {
 
         }
 
-        
+        this.freeFieldsAroundKing(field);
         // TODO should check if the enemyAttacker has reinforcment and should check which figures
         // are capable of removing the ckeck threat by taking the enemy piece!!!
         //if (kingIsNotMate) $('td').removeClass('unclickable');
@@ -89,5 +98,28 @@ export class CheckKingWrapper {
 
   getCurrentColor(className) {
     return className.substr(0, className.indexOf('-'));
+  }
+
+  freeFieldsAroundKing(kingPiece) {
+    let pieceLetterIndex = letters.indexOf(kingPiece.id[0]);
+    let pieceNumber = Number(kingPiece.id[1]);
+
+    let up = document.getElementById(kingPiece.id[0] + '' + (pieceNumber + 1));
+    let down = document.getElementById(kingPiece.id[0] + '' + (pieceNumber - 1));
+    let left = document.getElementById(letters[pieceLetterIndex - 1] + '' + pieceNumber);
+    let right = document.getElementById(letters[pieceLetterIndex + 1] + '' + pieceNumber);
+    let upLeft = document.getElementById(letters[pieceLetterIndex - 1] + '' + (pieceNumber + 1));
+    let upRight = document.getElementById(letters[pieceLetterIndex + 1] + '' + (pieceNumber + 1));
+    let downLeft = document.getElementById(letters[pieceLetterIndex - 1] + '' + (pieceNumber - 1));
+    let downRight = document.getElementById(letters[pieceLetterIndex + 1] + '' + (pieceNumber + 1));
+
+    if (up && ! this._attackScanner.isAttackedField(up, kingPiece)) $(up).removeClass('unclickable');
+    if (down && ! this._attackScanner.isAttackedField(down, kingPiece)) $(down).removeClass('unclickable');
+    if (left && ! this._attackScanner.isAttackedField(left, kingPiece)) $(left).removeClass('unclickable');
+    if (right && ! this._attackScanner.isAttackedField(right, kingPiece)) $(right).removeClass('unclickable');
+    if (upLeft && ! this._attackScanner.isAttackedField(upLeft, kingPiece)) $(upLeft).removeClass('unclickable');
+    if (upRight && ! this._attackScanner.isAttackedField(upRight, kingPiece)) $(upRight).removeClass('unclickable');
+    if (downRight && ! this._attackScanner.isAttackedField(downRight, kingPiece)) $(downRight).removeClass('unclickable');
+    if (downLeft && ! this._attackScanner.isAttackedField(downLeft, kingPiece)) $(downLeft).removeClass('unclickable');
   }
 }
