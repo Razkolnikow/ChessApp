@@ -43,8 +43,7 @@ export class CheckKingWrapper {
           // TODO should scan for pieces who can help the king
           let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
           $(canHelpTheKing).removeClass('unclickable');
-          // TODO the method should return which pieces can help and should free them from
-          // unclickable class to help their king
+
           // TODO Should check if the king can move to safe field!!!
           // if canHelpTheKing is false, then should check for king movements.
           // If no legal moves are available - Checkmate!
@@ -64,6 +63,7 @@ export class CheckKingWrapper {
 
         }
 
+        
         // TODO should check if the enemyAttacker has reinforcment and should check which figures
         // are capable of removing the ckeck threat by taking the enemy piece!!!
         //if (kingIsNotMate) $('td').removeClass('unclickable');

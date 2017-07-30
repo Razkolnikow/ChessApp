@@ -16,8 +16,6 @@ function validateKingMove(field, piece, cache) {
   let isLBBishopFieldEmpty = document.getElementById('C8').className.length == 0;
   let isLBKnightFieldEmpty = document.getElementById('B8').className.length == 0;
 
-
-  // TODO Should add restriction for king move if the field is attacked by another piece!!!
   if (fieldLetterIndex === pieceLetterIndex
     && (fieldNumber - pieceNumber === 1 || pieceNumber - fieldNumber === 1)) {
     return true;
@@ -69,10 +67,6 @@ function validateKingMove(field, piece, cache) {
   }
 
   return false;
-}
-
-function validateIfTargetedFieldIsAttacked(fieldIndice, fieldNum) {
-
 }
 
 export { validateKingMove };
