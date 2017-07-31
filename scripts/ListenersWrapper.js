@@ -113,13 +113,21 @@ export class CheckKingWrapper {
     let downLeft = document.getElementById(letters[pieceLetterIndex - 1] + '' + (pieceNumber - 1));
     let downRight = document.getElementById(letters[pieceLetterIndex + 1] + '' + (pieceNumber + 1));
 
-    if (up && ! this._attackScanner.isAttackedField(up, kingPiece)) $(up).removeClass('unclickable');
-    if (down && ! this._attackScanner.isAttackedField(down, kingPiece)) $(down).removeClass('unclickable');
-    if (left && ! this._attackScanner.isAttackedField(left, kingPiece)) $(left).removeClass('unclickable');
-    if (right && ! this._attackScanner.isAttackedField(right, kingPiece)) $(right).removeClass('unclickable');
-    if (upLeft && ! this._attackScanner.isAttackedField(upLeft, kingPiece)) $(upLeft).removeClass('unclickable');
-    if (upRight && ! this._attackScanner.isAttackedField(upRight, kingPiece)) $(upRight).removeClass('unclickable');
-    if (downRight && ! this._attackScanner.isAttackedField(downRight, kingPiece)) $(downRight).removeClass('unclickable');
-    if (downLeft && ! this._attackScanner.isAttackedField(downLeft, kingPiece)) $(downLeft).removeClass('unclickable');
+    if (up && ! this._attackScanner.isAttackedField(up, kingPiece)
+        && up.className.indexOf('-') < 0) $(up).removeClass('unclickable');
+    if (down && ! this._attackScanner.isAttackedField(down, kingPiece)
+        && down.className.indexOf('-') < 0) $(down).removeClass('unclickable');
+    if (left && ! this._attackScanner.isAttackedField(left, kingPiece)
+        && left.className.indexOf('-') < 0) $(left).removeClass('unclickable');
+    if (right && ! this._attackScanner.isAttackedField(right, kingPiece)
+        && right.className.indexOf('-') < 0) $(right).removeClass('unclickable');
+    if (upLeft && ! this._attackScanner.isAttackedField(upLeft, kingPiece)
+        && upLeft.className.indexOf('-') < 0) $(upLeft).removeClass('unclickable');
+    if (upRight && ! this._attackScanner.isAttackedField(upRight, kingPiece)
+        && upRight.className.indexOf('-') < 0) $(upRight).removeClass('unclickable');
+    if (downRight && ! this._attackScanner.isAttackedField(downRight, kingPiece)
+        && downRight.className.indexOf('-') < 0) $(downRight).removeClass('unclickable');
+    if (downLeft && ! this._attackScanner.isAttackedField(downLeft, kingPiece)
+        && downLeft.className.indexOf('-') < 0) $(downLeft).removeClass('unclickable');
   }
 }
