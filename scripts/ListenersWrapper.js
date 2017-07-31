@@ -24,6 +24,8 @@ import {
   KingAttackScanner
 } from './KingAttackScan.js';
 
+// TODO should forbid a piece to be able to move if after the move the king is checked!!!
+
 export class CheckKingWrapper {
   constructor(cache) {
     this._checkListener = new CheckListener();
@@ -78,6 +80,38 @@ export class CheckKingWrapper {
         //if (kingIsNotMate) $('td').removeClass('unclickable');
       } else {
         // TODO white king check logic here
+
+
+        $('td').addClass('unclickable');
+        $('.white-king').removeClass('unclickable');
+        $(enemy).removeClass('unclickable');
+        // This method works
+        let isEnemyReinforced = this._reinforcmentsScanner.scanEnemy(field, enemy);
+        if (isEnemyReinforced) {
+          // TODO should scan for pieces who can help the king
+          let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
+          $(canHelpTheKing).removeClass('unclickable');
+
+          // TODO Should check if the king can move to safe field!!!
+          // if canHelpTheKing is false, then should check for king movements.
+          // If no legal moves are available - Checkmate!
+          // TODO should implement functionality to be able to defend check from distance with
+          // other pieces.
+
+
+        } else {
+          // TODO check if King can move out of the attack or if can be helped!.
+          // TODO First check if king can move to safe field
+
+          // TODO check if king can be helped!
+          let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
+          if (canHelpTheKing) {
+            $(canHelpTheKing).removeClass('unclickable');
+          }
+
+        }
+
+        this.freeFieldsAroundKing(field);
       }
     } else if (this._checkMateListener.listen(field)) {
       this._infoWriter.write('Checkmate!');
