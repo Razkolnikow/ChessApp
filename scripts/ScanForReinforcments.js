@@ -46,13 +46,17 @@ export class ReinforcmentsScanner {
     let QueeRe = this._attackScanner.isAttackedFromQueen(fieldIndex, fieldNumber, kingColor);
     if (rockRe) {
       reinforcmentPieces.push(rockRe);
-    } else if (pawnRe) {
+    }
+    if (pawnRe) {
       reinforcmentPieces.push(pawnRe);
-    } else if (bishopRe) {
+    }
+    if (bishopRe) {
       reinforcmentPieces.push(bishopRe);
-    } else if (knightRe) {
+    }
+    if (knightRe) {
       reinforcmentPieces.push(knightRe);
-    } else if (QueeRe) {
+    }
+    if (QueeRe) {
       reinforcmentPieces.push(QueeRe);
     }
 
