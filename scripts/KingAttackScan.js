@@ -43,7 +43,8 @@ export class KingAttackScanner {
         if (kColor !== pieceColor) {
           return nextField1;
         }
-      } else if (nextField1.className.indexOf(kColor) >= 0) {
+      } else if (nextField1.className.indexOf(kColor) >= 0
+        || nextField1.className.indexOf('-') > 0) {
         break;
       }
     }
@@ -57,7 +58,8 @@ export class KingAttackScanner {
         if (kColor !== pieceColor) {
           return nextField2;
         }
-      } else if (nextField2.className.indexOf(kColor) >= 0) {
+      } else if (nextField2.className.indexOf(kColor) >= 0
+        || nextField2.className.indexOf('-') > 0) {
         break;
       }
     }
@@ -71,7 +73,8 @@ export class KingAttackScanner {
         if (kColor !== pieceColor) {
           return nextField3;
         }
-      } else if (nextField3.className.indexOf(kColor) >= 0) {
+      } else if (nextField3.className.indexOf(kColor) >= 0
+        || nextField3.className.indexOf('-') > 0) {
         break;
       }
     }
@@ -85,7 +88,8 @@ export class KingAttackScanner {
         if (kColor !== pieceColor) {
           return nextField4;
         }
-      } else if (nextField4.className.indexOf(kColor) >= 0) {
+      } else if (nextField4.className.indexOf(kColor) >= 0
+        || nextField4.className.indexOf('-') > 0) {
         break;
       }
     }
