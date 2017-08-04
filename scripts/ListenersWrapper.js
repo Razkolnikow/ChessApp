@@ -36,7 +36,7 @@ export class CheckKingWrapper {
     this._attackScanner = new KingAttackScanner();
   }
 
-  listen(field, enemy, islegal) {
+  listen(field, enemy, islegal, moveTurnValidator) {
     if (this._checkListener.listen(field)) {
       let kingIsNotMate = true;
       if (!islegal) {
@@ -46,7 +46,12 @@ export class CheckKingWrapper {
         this._cache.setCheckedKing(field);
       } else {
         // TODO if not legal move, dont execute!
-
+        let currentField = document.getElementById(this._cache.currentId);
+        currentField.className = '';
+        let lastField = document.getElementById(this._cache.cachedId);
+        lastField.className = this._cache.cachedClassName;
+        this._infoWriter.write('Not a legal move!');
+        moveTurnValidator.lastMove = this.getEnemyColor(lastField.className);
         return;
       }
       if (this._cache.blackKingCheck) {

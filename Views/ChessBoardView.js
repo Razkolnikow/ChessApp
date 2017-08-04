@@ -229,6 +229,11 @@ let chessBoard = function createChessBoard() {
 
         // TODO should add some kind of CheckPreventer (in order to make legal moves and
         // not allow white pieces to move and make white king vulnerable to check for example)
+        function configureCachedIdCachedClassName() {
+          cache.cachedId = cache.lastId;
+          cache.cachedClassName = event.target.className;
+          cache.currentId = event.target.id;
+        }
 
         function takePiece() {
           moveTurnValidator.lastMove = lastClickedElement
@@ -238,6 +243,7 @@ let chessBoard = function createChessBoard() {
           lastClickedElement.className = '';
           lastClickedElement.style.backgroundColor = cache.lastColor;
           cache.lastColor = -1;
+          configureCachedIdCachedClassName();
           cache.lastId = '';
 
           // Test Check
@@ -253,6 +259,9 @@ let chessBoard = function createChessBoard() {
           lastClickedElement.className = '';
           lastClickedElement.style.backgroundColor = cache.lastColor;
           cache.lastColor = -1;
+          // Adding new Func
+          configureCachedIdCachedClassName();
+          //
           cache.lastId = '';
 
           // Test Check
@@ -263,12 +272,12 @@ let chessBoard = function createChessBoard() {
         function checkForCheck() {
           let wantedColor = checkKingWrapper.getEnemyColor(event.target.className);
           let field = document.getElementsByClassName(wantedColor + '-king')[0];
-          let isIllegalMove = checkKingWrapper.listen(field, event.target);
+          let isIllegalMove = checkKingWrapper.listen(field, event.target, false, moveTurnValidator);
 
           // Listen for check for other king
           let secondWantedColor = wantedColor === 'white' ? 'black' : 'white';
           field = document.getElementsByClassName(secondWantedColor + '-king')[0];
-          checkKingWrapper.listen(field, event.target, true);
+          checkKingWrapper.listen(field, event.target, true, moveTurnValidator);
         }
 
         function moveKingSaveToGlobalCache(el) {

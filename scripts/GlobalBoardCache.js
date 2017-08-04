@@ -14,6 +14,9 @@ export class Cache {
     this._whiteKingCheck = false;
     this._counterAfterCheck = 0;
     this._isCheckmate = false;
+    this._currentId = '';
+    this._cachedId = '';
+    this._cachedClassName = '';
   }
 
   setCheckCounter() {
@@ -25,6 +28,30 @@ export class Cache {
       $('td').removeClass('unclickable');
       this._counterAfterCheck = 0;
     }
+  }
+
+  get currentId() {
+    return this._currentId;
+  }
+
+  set currentId(val) {
+    this._currentId = val;
+  }
+
+  get cachedId() {
+    return this._cachedId;
+  }
+
+  set cachedId(val) {
+    this._cachedId = val;
+  }
+
+  get cachedClassName() {
+    return this._cachedClassName;
+  }
+
+  set cachedClassName(val) {
+    this._cachedClassName = val;
   }
 
   get blackKingCheck() {
