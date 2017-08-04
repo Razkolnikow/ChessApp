@@ -227,7 +227,7 @@ let chessBoard = function createChessBoard() {
           }
         }
 
-        // TODO should add some kind of CheckPreventer (in order to make legal moves and 
+        // TODO should add some kind of CheckPreventer (in order to make legal moves and
         // not allow white pieces to move and make white king vulnerable to check for example)
 
         function takePiece() {
@@ -263,11 +263,12 @@ let chessBoard = function createChessBoard() {
         function checkForCheck() {
           let wantedColor = checkKingWrapper.getEnemyColor(event.target.className);
           let field = document.getElementsByClassName(wantedColor + '-king')[0];
-          checkKingWrapper.listen(field, event.target);
+          let isIllegalMove = checkKingWrapper.listen(field, event.target);
+
           // Listen for check for other king
           let secondWantedColor = wantedColor === 'white' ? 'black' : 'white';
           field = document.getElementsByClassName(secondWantedColor + '-king')[0];
-          checkKingWrapper.listen(field, event.target);
+          checkKingWrapper.listen(field, event.target, true);
         }
 
         function moveKingSaveToGlobalCache(el) {

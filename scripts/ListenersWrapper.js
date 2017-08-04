@@ -36,13 +36,19 @@ export class CheckKingWrapper {
     this._attackScanner = new KingAttackScanner();
   }
 
-  listen(field, enemy) {
+  listen(field, enemy, islegal) {
     if (this._checkListener.listen(field)) {
       let kingIsNotMate = true;
-      this._infoWriter.write('Check!')
-      this._cache.setCheckCounter();
-      // TODO
-      this._cache.setCheckedKing(field);
+      if (!islegal) {
+        this._infoWriter.write('Check!');
+        this._cache.setCheckCounter();
+        // TODO
+        this._cache.setCheckedKing(field);
+      } else {
+        // TODO if not legal move, dont execute!
+
+        return;
+      }
       if (this._cache.blackKingCheck) {
         // TODO get the king to move if check exists, no other moves should be legal!!!
         $('td').addClass('unclickable');
@@ -113,6 +119,8 @@ export class CheckKingWrapper {
 
         this.freeFieldsAroundKing(field);
       }
+
+      return true;
     } else if (this._checkMateListener.listen(field)) {
       this._infoWriter.write('Checkmate!');
       // TODO
@@ -145,7 +153,7 @@ export class CheckKingWrapper {
     let upLeft = document.getElementById(letters[pieceLetterIndex - 1] + '' + (pieceNumber + 1));
     let upRight = document.getElementById(letters[pieceLetterIndex + 1] + '' + (pieceNumber + 1));
     let downLeft = document.getElementById(letters[pieceLetterIndex - 1] + '' + (pieceNumber - 1));
-    let downRight = document.getElementById(letters[pieceLetterIndex + 1] + '' + (pieceNumber + 1));
+    let downRight = document.getElementById(letters[pieceLetterIndex + 1] + '' + (pieceNumber - 1));
 
     if (up && ! this._attackScanner.isAttackedField(up, kingPiece)
         && up.className.indexOf('-') < 0) $(up).removeClass('unclickable');
