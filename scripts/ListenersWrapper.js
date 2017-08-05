@@ -35,7 +35,9 @@ export class CheckKingWrapper {
   }
 
   listen(field, enemy, islegal, moveTurnValidator) {
-    if (this._checkListener.listen(field)) {
+    let kingAttacker = this._checkListener.listen(field);
+    // TODO implement logic to fix checkmate problem.
+    if (kingAttacker) {
       if (!islegal) {
         this._infoWriter.write('Check!');
         this._cache.setCheckCounter();
