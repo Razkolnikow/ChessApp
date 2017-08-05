@@ -1,6 +1,6 @@
 export class BlackOrWhiteMoveValidator {
   constructor () {
-    this._lastMove = '';
+    this._lastMove = 'black';
   }
 
   get lastMove()  {
