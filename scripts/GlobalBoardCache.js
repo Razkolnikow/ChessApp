@@ -156,7 +156,7 @@ export class Cache {
   }
 
   moveAWhiteRock() {
-    this.aBlackRockMoved = true;
+    this.aWhiteRockMoved = true;
   }
 
   moveHWhiteRock() {

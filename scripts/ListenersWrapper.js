@@ -24,8 +24,6 @@ import {
   KingAttackScanner
 } from './KingAttackScan.js';
 
-// TODO should forbid a piece to be able to move if after the move the king is checked!!!
-
 export class CheckKingWrapper {
   constructor(cache) {
     this._checkListener = new CheckListener();
@@ -128,8 +126,6 @@ export class CheckKingWrapper {
       this._infoWriter.write('Checkmate!');
       // TODO
     }
-
-    // TODO
   }
 
   getEnemyColor(className) {
