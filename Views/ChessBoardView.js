@@ -227,8 +227,6 @@ let chessBoard = function createChessBoard() {
           }
         }
 
-        // TODO should add some kind of CheckPreventer (in order to make legal moves and
-        // not allow white pieces to move and make white king vulnerable to check for example)
         function configureCachedIdCachedClassName() {
           cache.cachedId = cache.lastId;
           cache.cachedClassName = event.target.className;

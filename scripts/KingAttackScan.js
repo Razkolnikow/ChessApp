@@ -36,13 +36,11 @@ export class KingAttackScanner {
   isAttackedFromRock(fIndex, fNumber, kColor) {
     for (let i = fNumber + 1; i < 9; i++) {
       let nextField1 = document.getElementById(letters[fIndex] + i);
+      let pieceColor1 = this.getColor(nextField1);
       if (nextField1.className.length > 0
         && (nextField1.className.indexOf('rock') >= 0
-        || nextField1.className.indexOf('queen') >= 0)) {
-        let pieceColor = this.getColor(nextField1);
-        if (kColor !== pieceColor) {
-          return nextField1;
-        }
+        || nextField1.className.indexOf('queen') >= 0) && kColor !== pieceColor1) {
+        return nextField1;
       } else if (nextField1.className.indexOf(kColor) >= 0
         || nextField1.className.indexOf('-') > 0) {
         break;
@@ -51,13 +49,11 @@ export class KingAttackScanner {
 
     for (let i = fNumber - 1; i > 0; i--) {
       let nextField2 = document.getElementById(letters[fIndex] + i);
+      let pieceColor2 = this.getColor(nextField2);
       if (nextField2.className.length > 0
         && (nextField2.className.indexOf('rock') >= 0
-        || nextField2.className.indexOf('queen') >= 0)) {
-        let pieceColor = this.getColor(nextField2);
-        if (kColor !== pieceColor) {
-          return nextField2;
-        }
+        || nextField2.className.indexOf('queen') >= 0) && kColor !== pieceColor2) {
+        return nextField2;
       } else if (nextField2.className.indexOf(kColor) >= 0
         || nextField2.className.indexOf('-') > 0) {
         break;
@@ -66,13 +62,11 @@ export class KingAttackScanner {
 
     for (let i = fIndex + 1; i < letters.length; i++) {
       let nextField3 = document.getElementById(letters[i] + fNumber);
+      let pieceColor3 = this.getColor(nextField3);
       if (nextField3.className.length > 0
         && (nextField3.className.indexOf('rock') >= 0
-        || nextField3.className.indexOf('queen') >= 0)) {
-        let pieceColor = this.getColor(nextField3);
-        if (kColor !== pieceColor) {
-          return nextField3;
-        }
+        || nextField3.className.indexOf('queen') >= 0) && kColor !== pieceColor3) {
+        return nextField3;
       } else if (nextField3.className.indexOf(kColor) >= 0
         || nextField3.className.indexOf('-') > 0) {
         break;
@@ -81,13 +75,11 @@ export class KingAttackScanner {
 
     for (let i = fIndex - 1; i >= 0; i--) {
       let nextField4 = document.getElementById(letters[i] + fNumber);
+      let pieceColor4 = this.getColor(nextField4);
       if (nextField4.className.length > 0
         && (nextField4.className.indexOf('rock') >= 0
-        || nextField4.className.indexOf('queen') >= 0)) {
-        let pieceColor = this.getColor(nextField4);
-        if (kColor !== pieceColor) {
-          return nextField4;
-        }
+        || nextField4.className.indexOf('queen') >= 0) && kColor !== pieceColor4) {
+        return nextField4;        
       } else if (nextField4.className.indexOf(kColor) >= 0
         || nextField4.className.indexOf('-') > 0) {
         break;

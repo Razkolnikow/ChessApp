@@ -55,7 +55,6 @@ export class CheckKingWrapper {
         return;
       }
       if (this._cache.blackKingCheck) {
-        // TODO get the king to move if check exists, no other moves should be legal!!!
         $('td').addClass('unclickable');
         $('.black-king').removeClass('unclickable');
         $(enemy).removeClass('unclickable');
@@ -113,8 +112,7 @@ export class CheckKingWrapper {
         } else {
           // TODO check if King can move out of the attack or if can be helped!.
           // TODO First check if king can move to safe field
-
-          // TODO check if king can be helped!
+          
           let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
           if (canHelpTheKing) {
             $(canHelpTheKing).removeClass('unclickable');
