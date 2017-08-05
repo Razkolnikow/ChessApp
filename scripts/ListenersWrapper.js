@@ -55,15 +55,15 @@ export class CheckKingWrapper {
         return;
       }
       if (this._cache.blackKingCheck) {
-        $('td').addClass('unclickable');
-        $('.black-king').removeClass('unclickable');
-        $(enemy).removeClass('unclickable');
+        //$('td').addClass('unclickable');
+        //$('.black-king').removeClass('unclickable');
+        //$(enemy).removeClass('unclickable');
         // This method works
         let isEnemyReinforced = this._reinforcmentsScanner.scanEnemy(field, enemy);
         if (isEnemyReinforced) {
           // TODO should scan for pieces who can help the king
-          let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
-          $(canHelpTheKing).removeClass('unclickable');
+          //let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
+          //$(canHelpTheKing).removeClass('unclickable');
 
           // TODO Should check if the king can move to safe field!!!
           // if canHelpTheKing is false, then should check for king movements.
@@ -77,14 +77,14 @@ export class CheckKingWrapper {
           // TODO First check if king can move to safe field
 
           // TODO check if king can be helped!
-          let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
-          if (canHelpTheKing) {
-            $(canHelpTheKing).removeClass('unclickable');
-          }
+          //let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
+          //if (canHelpTheKing) {
+            //$(canHelpTheKing).removeClass('unclickable');
+          //}
 
         }
 
-        this.freeFieldsAroundKing(field);
+        //this.freeFieldsAroundKing(field);
         // TODO should check if the enemyAttacker has reinforcment and should check which figures
         // are capable of removing the ckeck threat by taking the enemy piece!!!
         //if (kingIsNotMate) $('td').removeClass('unclickable');
@@ -92,15 +92,15 @@ export class CheckKingWrapper {
         // TODO white king check logic here
 
 
-        $('td').addClass('unclickable');
-        $('.white-king').removeClass('unclickable');
-        $(enemy).removeClass('unclickable');
+        //$('td').addClass('unclickable');
+        //$('.white-king').removeClass('unclickable');
+        //$(enemy).removeClass('unclickable');
         // This method works
         let isEnemyReinforced = this._reinforcmentsScanner.scanEnemy(field, enemy);
         if (isEnemyReinforced) {
           // TODO should scan for pieces who can help the king
-          let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
-          $(canHelpTheKing).removeClass('unclickable');
+          //let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
+          //$(canHelpTheKing).removeClass('unclickable');
 
           // TODO Should check if the king can move to safe field!!!
           // if canHelpTheKing is false, then should check for king movements.
@@ -113,14 +113,14 @@ export class CheckKingWrapper {
           // TODO check if King can move out of the attack or if can be helped!.
           // TODO First check if king can move to safe field
 
-          let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
-          if (canHelpTheKing) {
-            $(canHelpTheKing).removeClass('unclickable');
-          }
+          //let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
+          //if (canHelpTheKing) {
+          //  $(canHelpTheKing).removeClass('unclickable');
+          //}
 
         }
 
-        this.freeFieldsAroundKing(field);
+        //this.freeFieldsAroundKing(field);
       }
 
       return true;
