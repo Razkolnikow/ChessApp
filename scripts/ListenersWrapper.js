@@ -36,7 +36,6 @@ export class CheckKingWrapper {
 
   listen(field, enemy, islegal, moveTurnValidator) {
     if (this._checkListener.listen(field)) {
-      let kingIsNotMate = true;
       if (!islegal) {
         this._infoWriter.write('Check!');
         this._cache.setCheckCounter();
@@ -52,79 +51,53 @@ export class CheckKingWrapper {
         moveTurnValidator.lastMove = this.getEnemyColor(lastField.className);
         return;
       }
-      if (this._cache.blackKingCheck) {
+
+      let isEnemyReinforced = this._reinforcmentsScanner.scanEnemy(field, enemy);
+      if (isEnemyReinforced) {
+        let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
+        if (! canHelpTheKing && ! this.freeFieldsAroundKing(field)) {
+          this._infoWriter.write('Checkmate!');
+        }
+        //$(canHelpTheKing).removeClass('unclickable');
+      }
+
+      //if (true) {
         //$('td').addClass('unclickable');
         //$('.black-king').removeClass('unclickable');
         //$(enemy).removeClass('unclickable');
         // This method works
-        let isEnemyReinforced = this._reinforcmentsScanner.scanEnemy(field, enemy);
-        if (isEnemyReinforced) {
-          // TODO should scan for pieces who can help the king
-          //let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
-          //$(canHelpTheKing).removeClass('unclickable');
 
-          // TODO Should check if the king can move to safe field!!!
-          // if canHelpTheKing is false, then should check for king movements.
-          // If no legal moves are available - Checkmate!
-          // TODO should implement functionality to be able to defend check from distance with
-          // other pieces.
+        //else {
+        //  let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
+        //  if (canHelpTheKing) {
+        //    //$(canHelpTheKing).removeClass('unclickable');
+        //  }
 
-
-        } else {
-          // TODO check if King can move out of the attack or if can be helped!.
-          // TODO First check if king can move to safe field
-
-          // TODO check if king can be helped!
-          //let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
-          //if (canHelpTheKing) {
-            //$(canHelpTheKing).removeClass('unclickable');
-          //}
-
-        }
-
+      //  }
         //this.freeFieldsAroundKing(field);
         // TODO should check if the enemyAttacker has reinforcment and should check which figures
         // are capable of removing the ckeck threat by taking the enemy piece!!!
-        //if (kingIsNotMate) $('td').removeClass('unclickable');
-      } else {
+      //} else {
         // TODO white king check logic here
-
-
         //$('td').addClass('unclickable');
         //$('.white-king').removeClass('unclickable');
         //$(enemy).removeClass('unclickable');
         // This method works
-        let isEnemyReinforced = this._reinforcmentsScanner.scanEnemy(field, enemy);
-        if (isEnemyReinforced) {
-          // TODO should scan for pieces who can help the king
-          //let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
+        //let isEnemyReinforced = this._reinforcmentsScanner.scanEnemy(field, enemy);
+        //if (isEnemyReinforced) {
+        //  let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
           //$(canHelpTheKing).removeClass('unclickable');
-
-          // TODO Should check if the king can move to safe field!!!
-          // if canHelpTheKing is false, then should check for king movements.
-          // If no legal moves are available - Checkmate!
-          // TODO should implement functionality to be able to defend check from distance with
-          // other pieces.
-
-
-        } else {
-          // TODO check if King can move out of the attack or if can be helped!.
-          // TODO First check if king can move to safe field
-
-          //let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
-          //if (canHelpTheKing) {
+      //  } else {
+      //    let canHelpTheKing = this._reinforcmentsScanner.scanSelf(field, enemy);
+      //    if (! canHelpTheKing) {
           //  $(canHelpTheKing).removeClass('unclickable');
-          //}
+        //  }
 
-        }
-
+      //  }
         //this.freeFieldsAroundKing(field);
-      }
+    //  }
 
-      return true;
-    } else if (this._checkMateListener.listen(field)) {
-      this._infoWriter.write('Checkmate!');
-      // TODO
+    //  return true;
     }
   }
 
@@ -154,13 +127,34 @@ export class CheckKingWrapper {
     let downLeft = document.getElementById(letters[pieceLetterIndex - 1] + '' + (pieceNumber - 1));
     let downRight = document.getElementById(letters[pieceLetterIndex + 1] + '' + (pieceNumber - 1));
 
-    if (up && ! this._attackScanner.isAttackedField(up, kingPiece)) $(up).removeClass('unclickable');
-    if (down && ! this._attackScanner.isAttackedField(down, kingPiece)) $(down).removeClass('unclickable');
-    if (left && ! this._attackScanner.isAttackedField(left, kingPiece)) $(left).removeClass('unclickable');
-    if (right && ! this._attackScanner.isAttackedField(right, kingPiece)) $(right).removeClass('unclickable');
-    if (upLeft && ! this._attackScanner.isAttackedField(upLeft, kingPiece)) $(upLeft).removeClass('unclickable');
-    if (upRight && ! this._attackScanner.isAttackedField(upRight, kingPiece)) $(upRight).removeClass('unclickable');
-    if (downRight && ! this._attackScanner.isAttackedField(downRight, kingPiece)) $(downRight).removeClass('unclickable');
-    if (downLeft && ! this._attackScanner.isAttackedField(downLeft, kingPiece)) $(downLeft).removeClass('unclickable');
+    let numberOfFieldsToEscape = 0;
+
+    if (up && ! this._attackScanner.isAttackedField(up, kingPiece)
+        && up.className.indexOf('-') < 0) numberOfFieldsToEscape++;
+    if (down &&!  this._attackScanner.isAttackedField(down, kingPiece)
+        && down.className.indexOf('-') < 0) numberOfFieldsToEscape++;
+    if (left && ! this._attackScanner.isAttackedField(left, kingPiece)
+        && left.className.indexOf('-') < 0) numberOfFieldsToEscape++;
+    if (right && ! this._attackScanner.isAttackedField(right, kingPiece)
+        && right.className.indexOf('-') < 0) numberOfFieldsToEscape++;
+    if (upLeft && ! this._attackScanner.isAttackedField(upLeft, kingPiece)
+        && upLeft.className.indexOf('-') < 0) numberOfFieldsToEscape++;
+    if (upRight && ! this._attackScanner.isAttackedField(upRight, kingPiece)
+        && upRight.className.indexOf('-') < 0) numberOfFieldsToEscape++;
+    if (downRight && ! this._attackScanner.isAttackedField(downRight, kingPiece)
+        && downRight.className.indexOf('-') < 0) numberOfFieldsToEscape++;
+    if (downLeft && ! this._attackScanner.isAttackedField(downLeft, kingPiece)
+        && downLeft.className.indexOf('-') < 0) numberOfFieldsToEscape++;
+
+    return numberOfFieldsToEscape;
+
+    //if (up && ! this._attackScanner.isAttackedField(up, kingPiece)) $(up).removeClass('unclickable');
+    //if (down && ! this._attackScanner.isAttackedField(down, kingPiece)) $(down).removeClass('unclickable');
+    //if (left && ! this._attackScanner.isAttackedField(left, kingPiece)) $(left).removeClass('unclickable');
+    //if (right && ! this._attackScanner.isAttackedField(right, kingPiece)) $(right).removeClass('unclickable');
+    //if (upLeft && ! this._attackScanner.isAttackedField(upLeft, kingPiece)) $(upLeft).removeClass('unclickable');
+    //if (upRight && ! this._attackScanner.isAttackedField(upRight, kingPiece)) $(upRight).removeClass('unclickable');
+    //if (downRight && ! this._attackScanner.isAttackedField(downRight, kingPiece)) $(downRight).removeClass('unclickable');
+    //if (downLeft && ! this._attackScanner.isAttackedField(downLeft, kingPiece)) $(downLeft).removeClass('unclickable');
   }
 }
