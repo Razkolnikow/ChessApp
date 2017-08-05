@@ -79,7 +79,7 @@ export class KingAttackScanner {
       if (nextField4.className.length > 0
         && (nextField4.className.indexOf('rock') >= 0
         || nextField4.className.indexOf('queen') >= 0) && kColor !== pieceColor4) {
-        return nextField4;        
+        return nextField4;
       } else if (nextField4.className.indexOf(kColor) >= 0
         || nextField4.className.indexOf('-') > 0) {
         break;
@@ -140,7 +140,7 @@ export class KingAttackScanner {
     let fifthKnight = document.getElementById(letters[fIndex  - 2] + (fNumber - 1));
     let sixthKnight = document.getElementById(letters[fIndex - 2] + (fNumber + 1));
     let seventhKnight = document.getElementById(letters[fIndex + 2] + (fNumber - 1));
-    let eightKnight = document.getElementById(letters[fIndex - 2] + (fNumber + 1));
+    let eightKnight = document.getElementById(letters[fIndex + 2] + (fNumber + 1));
 
     let enemyClassName = enemyColor + '-knight';
 
