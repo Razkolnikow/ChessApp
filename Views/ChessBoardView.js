@@ -237,6 +237,7 @@ let chessBoard = function createChessBoard() {
           moveTurnValidator.lastMove = lastClickedElement
           .className
           .substring(0, lastClickedElement.className.indexOf('-'));
+          cache.tookedPieceClassName = event.target.className;
           event.target.className = lastClickedElement.className;
           lastClickedElement.className = '';
           lastClickedElement.style.backgroundColor = cache.lastColor;

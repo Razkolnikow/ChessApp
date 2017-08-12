@@ -17,6 +17,15 @@ export class Cache {
     this._currentId = '';
     this._cachedId = '';
     this._cachedClassName = '';
+    this._tookedPieceClassName = '';
+  }
+
+  get tookedPieceClassName() {
+    return this._tookedPieceClassName;
+  }
+
+  set tookedPieceClassName(val) {
+    this._tookedPieceClassName = val;
   }
 
   setCheckCounter() {

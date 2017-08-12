@@ -46,7 +46,7 @@ export class CheckKingWrapper {
       } else {
         // TODO if not legal move, dont execute!
         let currentField = document.getElementById(this._cache.currentId);
-        currentField.className = '';
+        currentField.className = this._cache.tookedPieceClassName;
         let lastField = document.getElementById(this._cache.cachedId);
         lastField.className = this._cache.cachedClassName;
         this._infoWriter.write('Not a legal move!');
